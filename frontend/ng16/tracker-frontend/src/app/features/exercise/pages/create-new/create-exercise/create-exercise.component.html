@@ -1,0 +1,79 @@
+<form class="new-exercise-formgroup" [formGroup]="createExerciseForm">
+
+  <div class="grid-container ">
+    <div class="grid-item-form">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="titleField">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="descriptionField">
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <div>
+        <p>Primary Muscle Groups:</p>
+        <!-- Display the primaryMuscleGroupsList -->
+        <div *ngIf="primaryMuscleGroupsList.length > 0">
+
+          <ul>
+            <li *ngFor="let mg of primaryMuscleGroupsList">{{ mg }}</li>
+          </ul>
+        </div>
+
+        <select formControlName="primaryMuscleGroupsListInFg">
+          <option value="" disabled selected>Select Muscle Group</option>
+          <option *ngFor="let mg of muscleGroups" [value]="mg">{{ mg }}</option>
+        </select>
+
+        <!-- Button to add the selected item to the list -->
+        <button class="add-mg-button" mat-raised-button color="primary" type="button"
+          (click)="addMuscleGroup(primaryMuscleGroupsList,  'primaryMuscleGroupsList')">Add Item</button>
+      </div>
+
+      <br>
+
+      <div>
+        <p>Secondary Muscle Groups:</p>
+        <!-- Display the secondaryMuscleGroupsList -->
+        <div *ngIf="secondaryMuscleGroupsList.length > 0">
+
+          <ul>
+            <li *ngFor="let mg of secondaryMuscleGroupsList">{{ mg }}</li>
+          </ul>
+        </div>
+
+        <select formControlName="secondaryMuscleGroupsListInFg">
+          <option value="" disabled selected>Select Muscle Group</option>
+          <option *ngFor="let mg of muscleGroups" [value]="mg">{{ mg }}</option>
+        </select>
+
+        <!-- Button to add the selected item to the list -->
+        <button class="add-mg-button" mat-raised-button color="primary" type="button"
+          (click)="addMuscleGroup(secondaryMuscleGroupsList, 'secondaryMuscleGroupsList')">
+          Add Item
+        </button>
+
+      </div>
+
+      <br>
+      <br>
+      <!-- Submit Button -->
+      <button (click)="onSubmit()" mat-raised-button color="accent" type="submit">Save this new Exercise
+      </button>
+    </div>
+
+    <div class="grid-item-pic">
+      <img src="../../../../../../assets/musclegroups.jpg" alt="musclegroup-figure">
+    </div>
+
+  </div>
+
+</form>

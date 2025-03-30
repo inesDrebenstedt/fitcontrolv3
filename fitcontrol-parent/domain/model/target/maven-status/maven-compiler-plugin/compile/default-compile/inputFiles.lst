@@ -1,0 +1,14 @@
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\enums\deserializer\MusclegroupDeserializer.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\enums\MuscleGroup.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\enums\RepCategory.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\enums\WeightUnit.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\Exercise.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\ExerciseSet.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\mapstruct\ExerciseMapper.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\mapstruct\ExerciseSetMapper.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\mapstruct\RepMapper.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\mapstruct\WorkoutExerciseMapper.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\mapstruct\WorkoutMapper.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\Rep.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\Workout.java
+D:\fitcontrol\fitcontrol-3.0\fitcontrol-parent\domain\model\src\main\java\de\fitcontrol\model\WorkoutExercise.java

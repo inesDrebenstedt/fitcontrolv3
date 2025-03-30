@@ -1,0 +1,39 @@
+.new-exercise-formgroup {
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+.add-mg-button {
+    position: relative;
+    left: 2%;
+}
+
+.musclegroup-pic {
+    position: relative;
+    display: inline;
+    left: 40%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 60%;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+
+  .grid-item-pic {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .grid-item-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 10px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 20px;
+    text-align: left;
+  }
+

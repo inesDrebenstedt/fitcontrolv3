@@ -1,0 +1,56 @@
+<form 
+class="new-workout-formgroup"
+[formGroup]="createWorkoutForm" 
+>
+
+  <!-- String Fields -->
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="titleField">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="descriptionField">
+    </mat-form-field>
+  </div>
+
+  <br>
+
+  <div>
+    <p>Workout Exercises:</p>
+    <!-- Display the primaryMuscleGroupsList -->
+    <div *ngIf="workoutExercises.length > 0">
+      
+      <ul>
+        <li *ngFor="let workoutExercise of workoutExercises">{{ workoutExercise.referencedExercise.title }}</li>
+      </ul>
+    </div>
+
+    <select  formControlName="workoutExercisesListInFg">
+      <option value="" disabled selected>Select Exercise to add</option>
+      <option *ngFor="let exercise of exercises" [ngValue]="exercise">{{ exercise.title }}</option>
+    </select>
+
+    <!-- Button to add the selected item to the list -->
+    <button  
+    class="add-exercise-button"
+    mat-raised-button color="primary" 
+    type="button" 
+    (click)="addWorkoutExercise()">Add Exercise to Workout</button>
+  </div>
+
+  <br>
+<br>
+<br>
+  <!-- Submit Button -->
+  <button 
+  (click)="onSubmit()"
+  mat-raised-button 
+  color="accent" 
+  type="submit">Save this new Workout</button>
+
+</form>

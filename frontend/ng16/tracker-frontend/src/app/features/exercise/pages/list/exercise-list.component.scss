@@ -1,0 +1,80 @@
+mat-grid-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+  min-width: 80%;
+  max-height: 80%;
+  font-size: 20px;
+  border: 2px solid #000;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+mat-grid-tile:active {
+  transform: scale(0.95);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+mat-grid-list {
+  width: 70%;
+  top: 3%;
+  left: 4%;
+  margin: 8px;
+}
+
+.tile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  width: 100%;
+}
+
+.arrow-icon {
+  font-size: 24px;
+  color: black;
+  padding: 5%;
+}
+
+.exercise-title {
+  padding: 10%;
+}
+
+.create-exercise {
+  padding: 3%;
+  padding-left: 5%;
+}
+
+.filter-by-musclegroup {
+  position: absolute;
+  top: 15%;
+  left: 60%;
+}
+
+.select-mg-button {
+  position: absolute;
+  top: 125%;
+  left: 5%;
+}
+
+.reset-filter-button {
+  position: absolute;
+  height: fit-content;
+  top: 45%;
+  left: 115%;
+}
+
+.custom-primary {
+  background-color: #a3a5d7; // Your custom color
+}
+
+.custom-accent {
+  background-color: #4caf50; // Your custom color
+}
+
+.custom-warn {
+  background-color: #f44336; // Your custom color
+}

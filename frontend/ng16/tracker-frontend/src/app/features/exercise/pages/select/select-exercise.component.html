@@ -1,0 +1,65 @@
+
+<div class="create-exercise"> <!--TODO: impl-->
+  <app-actionwidget [widgetTitle]="'Create new Exercise to add to Workout'"></app-actionwidget>
+</div>
+
+<div>
+<h2 class="select-exercise-title"> Select Exercise to add to your Workout:</h2>
+    <br>
+  <!-- 
+    <div>
+      <mat-grid-list 
+      class="exercise-list" 
+      cols="4" rowHeight="100px" 
+      gutterSize="70px" *ngFor="let exercise of exercises">
+        <mat-grid-tile 
+        [style.background]=" '#f2a5c6' "
+        class="grid-tile"
+        >
+  
+          <div class="tile-content">
+            <span class="exercise-title">{{exercise.title}}</span>
+            <button mat-icon-button matTooltip="Add this exercise to your workout exercise" matTooltipShowDelay="500" matTooltipPosition="above"
+            (click)="addExerciseToWorkout(exercise)">
+            <mat-icon class="add-button">add</mat-icon>
+          </button>
+          </div>
+  
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    -->
+<div class="exercise-list">
+    <mat-grid-list 
+    cols="1" 
+    rowHeight="100px" 
+    [gutterSize]="'-80px'"
+    class="grid-list"
+    >
+      <mat-grid-tile *ngFor="let exercise of exercises" 
+      class="grid-tile">
+
+        <div class="tile-content">
+          <!-- Content of the tile -->
+          <p class="exercise-title">{{ exercise.title }}</p>
+          <p>{{ exercise.description }}</p>
+        </div>
+
+        <!-- Add button at the bottom-right corner of each tile -->
+        <button 
+        mat-mini-fab 
+        color="primary" 
+        class="add-button" 
+        (click)="addExerciseToWorkout(exercise)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+
+  </div>
+
+
+
+    

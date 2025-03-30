@@ -1,0 +1,17 @@
+de\fitcontrol\restapi\controller\ExerciseController.class
+de\fitcontrol\restapi\controller\json\ExerciseForListDTO$ExerciseForListDTOBuilderImpl.class
+de\fitcontrol\restapi\controller\json\RepForListDTO$RepForListDTOBuilderImpl.class
+de\fitcontrol\restapi\controller\json\WorkoutForListDTO$WorkoutForListDTOBuilderImpl.class
+de\fitcontrol\restapi\controller\json\WorkoutExerciseForListDTO$WorkoutExerciseForListDTOBuilderImpl.class
+de\fitcontrol\restapi\controller\json\ExerciseForListDTO$ExerciseForListDTOBuilder.class
+de\fitcontrol\restapi\controller\json\WorkoutExerciseForListDTO$WorkoutExerciseForListDTOBuilder.class
+de\fitcontrol\restapi\controller\json\ExerciseSetForListDTO$ExerciseSetForListDTOBuilderImpl.class
+de\fitcontrol\restapi\controller\json\ExerciseSetForListDTO.class
+de\fitcontrol\restapi\controller\json\WorkoutForListDTO.class
+de\fitcontrol\restapi\controller\json\RepForListDTO$RepForListDTOBuilder.class
+de\fitcontrol\restapi\controller\json\ExerciseForListDTO.class
+de\fitcontrol\restapi\controller\json\WorkoutForListDTO$WorkoutForListDTOBuilder.class
+de\fitcontrol\restapi\controller\json\RepForListDTO.class
+de\fitcontrol\restapi\controller\json\ExerciseSetForListDTO$ExerciseSetForListDTOBuilder.class
+de\fitcontrol\restapi\controller\WorkoutController.class
+de\fitcontrol\restapi\controller\json\WorkoutExerciseForListDTO.class

@@ -1,0 +1,19 @@
+<div>
+  <div class="create-workout">
+    <app-actionwidget [widgetTitle]="'Create Workout'" (click) = "onCreateWorkoutClick()"></app-actionwidget>
+  </div>
+  <br>
+
+  <div>
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="70px" *ngFor="let workout of workouts">
+      <mat-grid-tile (click)="onTileClick(workout)" [style.background]=" '#f2a5c6' ">
+
+        <div class="tile-content">
+          <span class="workout-title">{{workout.title}}</span>
+          <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+        </div>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

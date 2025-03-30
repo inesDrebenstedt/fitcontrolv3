@@ -1,0 +1,44 @@
+.grid-list {
+
+}
+  
+  .grid-tile {
+    position: relative;
+    overflow: hidden;
+    background: #f2a5c6; /* Tile background color */
+    border-radius: 4px; /* Optional styling */
+    margin: 0 auto; /* Center the tile horizontally */
+    max-width: 40%;
+}
+  
+  .tile-content {
+    position: absolute;
+    left: 3%;
+    padding: 10px; /* Space within the tile */
+    font-size: 16px; /* Font size for content */
+  }
+  
+  .add-button {
+    position: absolute; /* Position at the bottom-right */
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .exercise-list {
+    margin-left: -10%;
+  }
+
+  .exercise-title {
+    font-weight: bolder;
+  }
+  
+  .create-exercise {
+    position: relative;
+    margin-left: 3%;
+    margin-bottom: 5%;
+
+  }
+
+  .select-exercise-title {
+    margin-left: 8%;
+  }

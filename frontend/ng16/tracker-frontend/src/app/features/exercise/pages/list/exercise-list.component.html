@@ -1,0 +1,48 @@
+<div>
+  <div class="create-exercise">
+    <app-actionwidget [widgetTitle]="'Create new Exercise'" (click)="createNewExercise()"></app-actionwidget>
+  </div>
+  <br>
+
+  <div class="filter-by-musclegroup">
+    <p>Filter by Muscle Groups:</p>
+    <!-- Display the primaryMuscleGroupsList -->
+    <div *ngIf="muscleGroupSelected">
+      {{muscleGroupSelected}}
+    </div>
+    <form [formGroup]="chooseMuscleGroupForm">
+
+      <select formControlName="selectedMuscleGroupInFg">
+        <option value="" disabled selected>Select Muscle Group</option>
+        <option *ngFor="let mg of allMuscleGroups" [value]="mg">{{ mg }}</option>
+      </select>
+    </form>
+
+    <!-- Button to add the selected item to the list -->
+
+      <button class="select-mg-button" mat-raised-button color="primary" type="button"
+        (click)="filterByMuscleGroup()">
+        Filter By Muscle Group
+      </button>
+
+      <button class="reset-filter-button" mat-raised-button color="warn" type="button"
+      (click)="resetFilter()">
+      Reset Filter
+    </button>
+
+  </div>
+
+  <div>
+    <mat-grid-list  cols="4" rowHeight="70px" gutterSize="70px"
+      *ngFor="let exercise of exercises">
+      <mat-grid-tile (click)="onTileClick(exercise.id ?? 0)" [style.background]=" '#f2a5c6' ">
+
+        <div class="tile-content">
+          <span class="exercise-title">{{exercise.title}}</span>
+          <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+        </div>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

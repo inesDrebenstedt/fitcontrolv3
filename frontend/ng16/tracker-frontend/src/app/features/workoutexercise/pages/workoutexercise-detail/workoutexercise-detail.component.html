@@ -1,0 +1,35 @@
+<mat-card appearance="outlined">
+    <mat-card-header *ngIf="workout && workoutexercise">
+      <mat-card-title > {{workoutexercise.title}} </mat-card-title>
+      <mat-card-subtitle>{{workout.title}} | {{workout.date}} </mat-card-subtitle>
+    </mat-card-header>
+    <!--
+    <mat-card-actions>
+      <button mat-button>Learn More</button>
+    </mat-card-actions>
+    -->
+    
+      <div *ngIf="workoutexercise">
+          <h3>Sets</h3>
+            <mat-accordion class="sets-of-workoutexercise-list">
+                <mat-expansion-panel  *ngFor="let set of workoutexercise.sets" [hideToggle]="false">
+                      <mat-expansion-panel-header>
+                      <mat-panel-title>
+                              <div class="titles">
+                                <span>Description</span>
+                                <span>Weight</span>
+                                <span>Unit</span>
+                                <span>Reps</span>
+                              </div>
+                              <div hideToggle (click)="$event.stopPropagation();" class="values">
+                                <span>{{ set.description }}</span> |
+                                <span>{{ set.weight }}</span> |
+                                <span>{{ set.unit }}</span> |
+                                <span>{{ set.reps.length }}</span>
+                              </div>
+                      </mat-panel-title>
+                      </mat-expansion-panel-header>
+                </mat-expansion-panel>
+            </mat-accordion>            
+      </div>
+  </mat-card>
