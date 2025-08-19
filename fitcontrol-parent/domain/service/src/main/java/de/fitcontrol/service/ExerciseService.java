@@ -10,14 +10,23 @@ import org.springframework.stereotype.Service;
 import de.fitcontrol.model.Exercise;
 import de.fitcontrol.model.enums.MuscleGroup;
 import de.fitcontrol.service.ports.ExerciseRepository;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Service
+@NoArgsConstructor
 public class ExerciseService {
 
-	@Autowired ExerciseRepository exerciseRepo;
+	@Autowired 
+	private ExerciseRepository exerciseRepo;
 	
+	
+	public ExerciseService(ExerciseRepository exerciseRepo) {
+		super();
+		this.exerciseRepo = exerciseRepo;
+	}
+
 	public Exercise createExercise(Exercise exercise) {
 		Set<MuscleGroup> primaryMuscleGroups = new HashSet<>();
 		exercise.getPrimaryMuscleGroups().forEach(mg -> {

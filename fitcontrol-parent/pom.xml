@@ -16,17 +16,18 @@
 	<packaging>pom</packaging>
 	
 	<properties>
-        <lombok.version>1.18.36</lombok.version> <!-- Lombok version -->
+        <lombok.version>1.18.38</lombok.version> <!-- Lombok version -->
         <mapstruct.version>1.5.2.Final</mapstruct.version> <!-- MapStruct version -->
         <java.version>17</java.version> <!-- Specify your Java version -->
     </properties>
 
-	<modules>
-		<module>fitcontrol</module>
-		<module>adapter/restapi</module>
-		<module>domain/model</module>
-		<module>domain/service</module>
-	</modules>
+<modules>
+    <module>domain/model</module>
+    <module>domain/service</module>
+    <module>adapter/restapi</module>
+    <module>fitcontrol</module>
+</modules>
+
 
 	<dependencies>
 		<!--
@@ -111,11 +112,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
@@ -149,11 +145,6 @@
 			<optional>true</optional>
 		</dependency>
 		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>

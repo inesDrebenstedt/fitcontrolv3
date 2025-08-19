@@ -80,6 +80,24 @@ public class ExerciseSet {
 			this.numberOfReps = this.reps.size();
 		}
 	}
+	
+	public void addRep(Rep rep) {
+	    if (rep.getId() == null) {
+	        rep.setExerciseSet(this);
+	        this.reps.add(rep);
+	    } else {
+	        updateRep(rep);
+	    }
+	}
+
+	public void updateRep(Rep updatedRep) {
+	    Rep existing = this.reps.stream()
+	            .filter(r -> r.getId().equals(updatedRep.getId()))
+	            .findFirst()
+	            .orElseThrow(() -> new IllegalArgumentException("Rep not found"));
+
+	    existing.setCategory(updatedRep.getCategory());
+	}
 
 }
 

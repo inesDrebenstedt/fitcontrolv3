@@ -6,7 +6,7 @@ FROM maven:3.8.4-openjdk-17 AS build
 WORKDIR /app
 
 # Copy the built JAR file into the container
-COPY target/fitcontrol-0.0.1-SNAPSHOT.jar app.jar
+COPY target/fitcontrol-1.0-SNAPSHOT.jar app.jar
 
 # Expose the port that your Spring Boot application will run on
 EXPOSE 8083

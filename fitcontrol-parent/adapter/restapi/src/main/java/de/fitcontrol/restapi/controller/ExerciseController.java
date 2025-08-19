@@ -58,6 +58,8 @@ public class ExerciseController {
 	@ApiResponse(responseCode = "200", description = "OK")
 	@GetMapping("/singleexercise")
 	public Optional<Exercise> showExercise(@RequestParam Long exerciseId) {
+		Optional<Exercise> test = exerciseService.showExercise(exerciseId);
+		System.out.println("------------------- ...:" + test.get().getTitle());
 		return exerciseService.showExercise(exerciseId);
 	}
 	

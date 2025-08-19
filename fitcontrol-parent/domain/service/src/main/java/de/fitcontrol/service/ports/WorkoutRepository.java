@@ -12,4 +12,5 @@ import de.fitcontrol.model.Workout;
 public interface WorkoutRepository extends JpaRepository<Workout, Long>{
 
 	List<Workout> findByDate(LocalDateTime date);
+	List<Workout> findByTitle(String title);
 }

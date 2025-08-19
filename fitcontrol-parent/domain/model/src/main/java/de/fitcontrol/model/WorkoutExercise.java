@@ -88,6 +88,41 @@ public class WorkoutExercise {
 		}
 		
 	}
+	
+	public void addExerciseSet(ExerciseSet set) {
+	    if (set.getId() == null) {
+	        set.setWorkoutexercise(this);
+	        this.sets.add(set);
+	    } else {
+	        updateExerciseSet(set);
+	    }
+	}
+	
+	public void updateExerciseSet(ExerciseSet updatedSet) {
+	    ExerciseSet existing = this.sets.stream()
+	            .filter(s -> s.getId().equals(updatedSet.getId()))
+	            .findFirst()
+	            .orElseThrow(() -> new IllegalArgumentException("Set not found"));
+
+	    existing.setDescription(updatedSet.getDescription());
+	    existing.setWeight(updatedSet.getWeight());
+	    existing.setUnit(updatedSet.getUnit());
+
+	    // update reps safely
+	    for (Rep rep : updatedSet.getReps()) {
+	        if (rep.getId() == null) {
+	            existing.addRep(rep);
+	        } else {
+	            existing.updateRep(rep);
+	        }
+	    }
+
+	    existing.setNumberOfReps();
+	}
+
+	public void removeExerciseSet(Long setId) {
+	    this.sets.removeIf(s -> s.getId().equals(setId));
+	}
 
 	/*
 	@Override

@@ -42,7 +42,8 @@ public class Workout {
 			CascadeType.DETACH, 
 			CascadeType.PERSIST, 
 			CascadeType.REFRESH, 
-			CascadeType.REMOVE
+			CascadeType.REMOVE, 
+			CascadeType.MERGE
 			} ,orphanRemoval = true)
 	@JsonManagedReference(value = "workout-exercise")
 	private List<WorkoutExercise> workoutexercises;
@@ -67,14 +68,50 @@ public class Workout {
 		return this.workoutexercises;
 	}
 	
-	public void updateWorkoutExercise(WorkoutExercise updatedExercise) {
-		this.workoutexercises.removeIf(exercise -> exercise.getId().equals(updatedExercise.getId()));
-		this.workoutexercises.add(updatedExercise);
+	public void addWorkoutExercise(WorkoutExercise exercise) {
+	    if (exercise.getId() == null) { // new child
+	        exercise.setWorkout(this);
+	        this.workoutexercises.add(exercise);
+	    } else {
+	        updateWorkoutExercise(exercise);
+	    }
 	}
+	
+	public void updateWorkoutExercise(WorkoutExercise updatedExercise) {
+	    WorkoutExercise existing = this.workoutexercises.stream()
+	            .filter(ex -> ex.getId().equals(updatedExercise.getId()))
+	            .findFirst()
+	            .orElseThrow(() -> new IllegalArgumentException("Exercise not found"));
+
+	    existing.setDescription(updatedExercise.getDescription());
+	    existing.setReferencedExercise(updatedExercise.getReferencedExercise());
+	    existing.setTitle(); // recalculates title from referencedExercise if needed
+
+	    // update sets safely
+	    for (ExerciseSet set : updatedExercise.getSets()) {
+	        if (set.getId() == null) {
+	            existing.addExerciseSet(set); // add new set
+	        } else {
+	            existing.updateExerciseSet(set); // update existing set
+	        }
+	    }
+	}
+
+	
+//	public void updateWorkoutExercise(WorkoutExercise updatedExercise) {
+//		this.workoutexercises.removeIf(exercise -> exercise.getId().equals(updatedExercise.getId()));
+//		this.workoutexercises.add(updatedExercise);
+//	}
 	
 	public void deleteWorkoutExercise(WorkoutExercise updatedExercise) {
 		this.workoutexercises.removeIf(exercise -> exercise.getId().equals(updatedExercise.getId()));
 	}
+	/*
+	 * should be same as
+	 * public void removeWorkoutExercise(Long exerciseId) {
+    this.workoutexercises.removeIf(ex -> ex.getId().equals(exerciseId));
+}
+	 */
 	
 	public void addExerciseSet(WorkoutExercise workoutExercise, ExerciseSet exerciseSet) {
 		workoutExercise.getSets().add(exerciseSet);

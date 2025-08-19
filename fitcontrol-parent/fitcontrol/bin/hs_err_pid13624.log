@@ -1,0 +1,224 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 268435456 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3559), pid=13624, tid=14876
+#
+# JRE version:  (17.0.7+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.7+7, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dnet.bytebuddy.agent.attacher.dump= net.bytebuddy.agent.Attacher com.sun.tools.attach.VirtualMachine 13452 C:\Users\inesd\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar false 
+
+Host: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz, 12 cores, 15G,  Windows 11 , 64 bit Build 22621 (10.0.22621.4974)
+Time: Sun Mar 30 14:19:38 2025 Mitteleuropäische Sommerzeit elapsed time: 0.021042 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000021553c6c420):  JavaThread "Unknown thread" [_thread_in_vm, id=14876, stack(0x00000060d8500000,0x00000060d8600000)]
+
+Stack: [0x00000060d8500000,0x00000060d8600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x67754a]
+V  [jvm.dll+0x834304]
+V  [jvm.dll+0x835aae]
+V  [jvm.dll+0x836113]
+V  [jvm.dll+0x24696f]
+V  [jvm.dll+0x6743f9]
+V  [jvm.dll+0x668c8a]
+V  [jvm.dll+0x3061bb]
+V  [jvm.dll+0x30d6a6]
+V  [jvm.dll+0x35cece]
+V  [jvm.dll+0x35d0ff]
+V  [jvm.dll+0x2dd048]
+V  [jvm.dll+0x2ddfb4]
+V  [jvm.dll+0x8066d1]
+V  [jvm.dll+0x36ac91]
+V  [jvm.dll+0x7e5cec]
+V  [jvm.dll+0x3ed56f]
+V  [jvm.dll+0x3ef0a1]
+C  [jli.dll+0x528b]
+C  [ucrtbase.dll+0x29333]
+C  [KERNEL32.DLL+0x1259d]
+C  [ntdll.dll+0x5af38]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffabb927018, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000021553cd8620 GCTaskThread "GC Thread#0" [stack: 0x00000060d8600000,0x00000060d8700000] [id=21312]
+  0x0000021553ce94b0 ConcurrentGCThread "G1 Main Marker" [stack: 0x00000060d8700000,0x00000060d8800000] [id=21852]
+  0x0000021553cea660 ConcurrentGCThread "G1 Conc#0" [stack: 0x00000060d8800000,0x00000060d8900000] [id=21288]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffabb0fdaf7]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000021553c666d0] Heap_lock - owner thread: 0x0000021553c6c420
+
+Heap address: 0x0000000701800000, size: 4072 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000701800000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffabb4e0db9]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.013 Loaded shared library D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff68d380000 - 0x00007ff68d38e000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\java.exe
+0x00007ffb2bcf0000 - 0x00007ffb2bf07000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffaeb930000 - 0x00007ffaeb94a000 	C:\Program Files\Avast Software\Avast\aswhook.dll
+0x00007ffb29f70000 - 0x00007ffb2a034000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffb29020000 - 0x00007ffb293f1000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffb295a0000 - 0x00007ffb296b1000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffb0f280000 - 0x00007ffb0f299000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\VCRUNTIME140.dll
+0x00007ffb210d0000 - 0x00007ffb210e7000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\jli.dll
+0x00007ffb2b580000 - 0x00007ffb2b731000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffb09b20000 - 0x00007ffb09db2000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.4830_none_270fe7d773858e80\COMCTL32.dll
+0x00007ffb28eb0000 - 0x00007ffb28ed6000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffb2b4d0000 - 0x00007ffb2b577000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffb2a040000 - 0x00007ffb2a069000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffb296c0000 - 0x00007ffb297db000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffb29920000 - 0x00007ffb299ba000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffb2bbb0000 - 0x00007ffb2bbe1000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffb212a0000 - 0x00007ffb212ac000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\vcruntime140_1.dll
+0x00007ffaf9c50000 - 0x00007ffaf9ce1000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\msvcp140.dll
+0x00007ffabae10000 - 0x00007ffabba58000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\server\jvm.dll
+0x00007ffb29e40000 - 0x00007ffb29ef1000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffb2a870000 - 0x00007ffb2a917000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffb29570000 - 0x00007ffb29598000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffb2b740000 - 0x00007ffb2b854000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffb21090000 - 0x00007ffb210c4000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffb12f00000 - 0x00007ffb12f09000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffb21800000 - 0x00007ffb2180a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffb2b440000 - 0x00007ffb2b4b1000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffb27ed0000 - 0x00007ffb27ee8000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffb26030000 - 0x00007ffb2603a000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\jimage.dll
+0x00007ffb196c0000 - 0x00007ffb198f2000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffb29ab0000 - 0x00007ffb29e40000 	C:\WINDOWS\System32\combase.dll
+0x00007ffb299c0000 - 0x00007ffb29a97000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffb19300000 - 0x00007ffb19332000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffb28e30000 - 0x00007ffb28eab000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffb121d0000 - 0x00007ffb121f5000 	D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin;C:\WINDOWS\SYSTEM32;C:\Program Files\Avast Software\Avast;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.4830_none_270fe7d773858e80;D:\Programme\spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64\sts-4.19.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502\jre\bin\server
+
+VM Arguments:
+jvm_args: -Dnet.bytebuddy.agent.attacher.dump= 
+java_command: net.bytebuddy.agent.Attacher com.sun.tools.attach.VirtualMachine 13452 C:\Users\inesd\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar false 
+java_class_path (initial): C:\Users\inesd\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 268435456                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4269801472                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4269801472                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Amazon Corretto\jdk17.0.13_11
+PATH=D:/Programme/spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64/sts-4.19.0.RELEASE//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;D:/Programme/spring-tool-suite-4-4.19.0.RELEASE-e4.28.0-win32.win32.x86_64/sts-4.19.0.RELEASE//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\Program Files\Amazon Corretto\jdk17.0.13_11\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Java\jre-1.8;C:\ProgramData\chocolatey\bin;C:\Program Files\RabbitMQ Server\rabbitmq_server-3.12.1\sbin;C:\apache-maven-3.8.8\bin;C:\Program Files\liquibase;C:\Program Files\Docker\Docker\resources\bin;C:\Users\inesd\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\dotnet\;D:\Windows Kits\10\Windows Performance Toolkit\;D:\fitcontrol\geckodriver-v0.35.0-win64\geckodriver.exe;C:\Program Files\Git\cmd;D:\Programme\minikube;C:\Python312\Scripts\;C:\Python312\;
+USERNAME=inesd
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+TMP=C:\Users\inesd\AppData\Local\Temp
+TEMP=C:\Users\inesd\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.4974)
+OS uptime: 0 days 5:10 hours
+Hyper-V role detected
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 158 stepping 10 microcode 0xde, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, hv
+
+Memory: 4k page, system-wide physical 16284M (356M free)
+TotalPageFile size 28783M (AvailPageFile size 201M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 64M, peak: 320M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.7+7) for windows-amd64 JRE (17.0.7+7), built on Apr 18 2023 22:10:42 by "temurin" with MS VC++ 16.7 (VS2019)
+
+END.
