@@ -1,19 +1,24 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WorkoutClass } from 'src/app/core/class/workout.class';
-import { WorkoutExerciseClass } from 'src/app/core/class/workoutExercise.class';
-import { Exercise } from 'src/app/core/model/exercise';
-import { Workout } from 'src/app/core/model/workout';
-import { WorkoutExercise } from 'src/app/core/model/workout-exercise';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
-import { WorkoutService } from 'src/app/shared/services/workout.service';
-
+import { WorkoutClass } from '../../../../../app/core/class/workout.class';
+import { WorkoutExerciseClass } from '../../../../../app/core/class/workoutExercise.class';
+import { Exercise } from '../../../../core/model/exercise';
+import { Workout } from '../../../../core/model/workout';
+import { WorkoutExercise } from '../../../../core/model/workout-exercise';
+import { ExerciseService } from '../../../../shared/services/exercise.service';
+import { WorkoutService } from '../../../../shared/services/workout.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
+  standalone: true,
   selector: 'app-workout-create',
   templateUrl: './workout-create.component.html',
-  styleUrls: ['./workout-create.component.scss']
+  styleUrls: ['./workout-create.component.scss'],
+  imports: [ReactiveFormsModule, MatFormFieldModule, CommonModule, MatLabel, MatInputModule]
 })
 export class WorkoutCreateComponent {
 
@@ -26,11 +31,12 @@ export class WorkoutCreateComponent {
   ) { }
 
   newWorkout: Workout | undefined;
-  createWorkoutForm: FormGroup = this.fb.group({});
+  createWorkoutForm!: FormGroup; // = this.fb.group({});
   formControl: FormControl = new FormControl('');
   description: string = '';
   workoutExercises: WorkoutExercise[] = [];
   exercises: Exercise[] | undefined;
+  comingFromCreationView: boolean | undefined;
 
   // Model for the selected value
   selectedExercise: Exercise | undefined;
@@ -46,22 +52,25 @@ export class WorkoutCreateComponent {
     this.exerciseService.getExercises().subscribe(data =>
     {this.exercises = data}
     );
-
+console.log('found exercises: ' + this.exercises?.length)
   }
 
   onSubmit() {
     const now = new Date();
-    let createdWorkout: Workout | undefined;//TODO
+    let createdWorkout: Workout | undefined;
     let newWorkoutTitle = this.createWorkoutForm.get('titleField')?.value;
     this.newWorkout = new WorkoutClass(0, this.workoutExercises, newWorkoutTitle, now, 0, false);
     this.workoutService.createWorkout(this.newWorkout).subscribe(data => {
       createdWorkout = data;
-
       console.log('---------- createdWorkout: ' + JSON.stringify(createdWorkout));
-      //TODO : show detail page of this new workout
-      this.router.navigate(['/workout/singleworkout'], { queryParams: { workoutId: createdWorkout!.id } , state: { comingFromWorkoutCreationView: true } });
-
+    
+              //TODO : show detail page of this new workout
+      this.router.navigate(['/workout/createdworkout'], { 
+        queryParams: { title: createdWorkout!.title, creationTime: createdWorkout!.date },
+         state: { comingFromWorkoutCreationView: true } 
+        });
     });
+
   }
 
   addWorkoutExercise() {

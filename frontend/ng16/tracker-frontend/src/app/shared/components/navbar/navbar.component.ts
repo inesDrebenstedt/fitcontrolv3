@@ -1,15 +1,25 @@
 import { Component, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { WorkoutService } from 'src/app/shared/services/workout.service';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { WorkoutService } from '../../../shared/services/workout.service';
+import { ExerciseService } from '../../../shared/services/exercise.service';
+import { MatToolbar } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
+  standalone: true,
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  imports: [MatToolbar,
+     MatIconModule,
+      MatMenuModule,
+    CommonModule ]
 })
 export class NavbarComponent {
+
 
   //@Input('navbarTitle') 
   navbarTitle: string = ' ';
@@ -102,6 +112,10 @@ export class NavbarComponent {
 
   goToHome() {
     this.router.navigate(['/']);
+  }
+
+  logout() {
+    window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout';
   }
 
 }

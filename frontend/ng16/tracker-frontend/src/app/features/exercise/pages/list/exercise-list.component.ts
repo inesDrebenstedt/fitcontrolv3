@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { ExerciseService } from '../../../../shared/services/exercise.service';
 import { ActivatedRoute } from '@angular/router';
-import { Exercise } from 'src/app/core/model/exercise';
+import { Exercise } from '../../../../../app/core/model/exercise'; 
 import { Router, } from '@angular/router';
-import { MuscleGroup } from 'src/app/core/enums/muscle-group';
+import { MuscleGroup } from '../../../../../app/core/enums/muscle-group';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActionwidgetComponent } from "@old_shared/components/actionwidget/actionwidget.component";
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatGridList, MatGridTile } from "@angular/material/grid-list";
+import { MatIconModule } from "@angular/material/icon";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
+  standalone: true,
   selector: 'app-exercise-list',
   templateUrl: './exercise-list.component.html',
-  styleUrls: ['./exercise-list.component.scss']
+  styleUrls: ['./exercise-list.component.scss'],
+  imports: [ActionwidgetComponent, ReactiveFormsModule, MatGridList, MatGridTile, MatIconModule, CommonModule]
 })
 export class ExerciseListComponent {
 
@@ -19,7 +26,8 @@ export class ExerciseListComponent {
     private exerciseService: ExerciseService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   navbarTitle: string = 'List of Exercises TODO';
   exercises: Exercise[] | undefined;
@@ -27,7 +35,7 @@ export class ExerciseListComponent {
   muscleGroupSelected: MuscleGroup | undefined;
   // Convert enum to array of values
   allMuscleGroups = Object.values(MuscleGroup);
-  chooseMuscleGroupForm: FormGroup = this.fb.group({});
+  chooseMuscleGroupForm!: FormGroup;
   formControl: FormControl = new FormControl('');
 
 

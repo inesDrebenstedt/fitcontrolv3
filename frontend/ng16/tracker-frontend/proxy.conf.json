@@ -1,8 +1,17 @@
 {
-  "/fitcontrol": {
-    "target": "http://fitcontrol-backend-service.wt-stage-ns.svc.cluster.local/fitcontrol/tracker",
+  "/fitcontrol/tracker/api": {
+    "target": "http://localhost:8083",
     "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
+    "changeOrigin": true
+  },
+  "/fitcontrol/tracker/oauth2": {
+    "target": "http://localhost:8083",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/fitcontrol/tracker/login": {
+    "target": "http://localhost:8083",
+    "secure": false,
+    "changeOrigin": true
   }
 }

@@ -1,13 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Workout } from 'src/app/core/model/workout';
-import { WorkoutExercise } from 'src/app/core/model/workout-exercise';
-import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { Workout } from '../../../../core/model/workout';
+import { WorkoutExercise } from '../../../../core/model/workout-exercise';
+import { WorkoutService } from '../../../../shared/services/workout.service';
+import { MatCard, MatCardHeader, MatCardSubtitle, MatCardTitle } from "@angular/material/card";
+
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
+
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-workoutexercise-detail',
   templateUrl: './workoutexercise-detail.component.html',
-  styleUrls: ['./workoutexercise-detail.component.scss']
+  styleUrls: ['./workoutexercise-detail.component.scss'],
+  imports: [MatCard,
+        MatCardHeader,
+        MatCardTitle,
+        MatCardSubtitle,
+        MatAccordion,
+        MatExpansionPanel,
+        MatExpansionPanelHeader,
+        MatExpansionPanelTitle, CommonModule]
 })
 export class WorkoutexerciseDetailComponent implements OnInit {
   workoutId: number | undefined;

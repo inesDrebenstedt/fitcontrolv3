@@ -1,5 +1,12 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartType } from 'chart.js';
+import { Chart, ChartConfiguration, ChartType, CategoryScale, LinearScale, BarElement, BarController,
+     LineController,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend 
+} from 'chart.js';
 
 @Component({
   selector: 'app-xychart',
@@ -39,6 +46,12 @@ export class XychartComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
+    Chart.register(CategoryScale, LinearScale, BarElement, BarController, LineController,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend );
   }
 
 }

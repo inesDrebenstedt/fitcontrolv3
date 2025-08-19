@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { ExerciseService } from '../../../../shared/services/exercise.service';
 import { ActivatedRoute } from '@angular/router';
-import { Exercise } from 'src/app/core/model/exercise';
+import { Exercise } from '../../../../../app/core/model/exercise';   
 import { Router, } from '@angular/router';
+import { ActionwidgetComponent } from "@old_shared/components/actionwidget/actionwidget.component";
+import { MatGridList, MatGridTile } from "@angular/material/grid-list";
+
+import { MatIconModule } from "@angular/material/icon";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-select-exercise',
   templateUrl: './select-exercise.component.html',
-  styleUrls: ['./select-exercise.component.scss']
+  styleUrls: ['./select-exercise.component.scss'],
+  imports: [ActionwidgetComponent, MatGridList, MatGridTile, MatIconModule, CommonModule]
 })
 export class SelectExerciseComponent {
 
@@ -39,7 +45,8 @@ export class SelectExerciseComponent {
     console.log('addExerciseToWorkout clicked. exerciseId = ' + exercise.id)
 
     this.router.navigate(['workout/singleworkout'],
-      { queryParams: { workoutId: this.workoutId }, state: { selectedExerciseId: exercise.id, comingFromExerciseSelectionView: true } }
+      { queryParams: { workoutId: this.workoutId }, 
+      state: { selectedExerciseId: exercise.id, comingFromExerciseSelectionView: true } }
     );
   }
 

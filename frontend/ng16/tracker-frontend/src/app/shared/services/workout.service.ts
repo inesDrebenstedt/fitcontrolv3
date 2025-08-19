@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import { environment } from './../../../../src/environments/environment.prod';
-import { environment } from './../../../../src/environments/environment.local';
-import { Workout } from 'src/app/core/model/workout';
-import { WorkoutExercise } from 'src/app/core/model/workout-exercise';
-import { ExerciseSet } from 'src/app/core/model/exercise-set';
+import { environment } from '../../../environments/environment.local'
+import { Workout } from '../../core/model/workout';
+import { WorkoutExercise } from '../../core/model/workout-exercise';
+import { ExerciseSet } from '../../core/model/exercise-set';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,11 @@ export class WorkoutService {
   getWorkout(id: number): Observable<Workout> {
     console.log('............ WorkoutService getWorkout ' )
     return this.http.get<Workout>(`${this.apiUrl}/singleworkout?workoutId=${id}`);
+  }
+
+    findWorkoutByTitleAndCreationDate(title: string, creationTime: Date): Observable<Workout> {
+    console.log('............ WorkoutService findWorkoutByTitleAndCreationDate '  + title + ', ' + creationTime)
+    return this.http.get<Workout>(`${this.apiUrl}/createdworkout?title=${title}?creationTime=${creationTime}`);
   }
 
   createWorkout(newWorkout: Workout): Observable<Workout> {
@@ -119,6 +124,7 @@ export class WorkoutService {
   }
 
   deleteWorkout(workoutId: number) { 
+     console.log('............ WorkoutService deleteWorkout ' + this.apiUrl )
     return this.http.delete<Workout>(`${this.apiUrl}/delete?workoutId=${workoutId}`);
   }
 

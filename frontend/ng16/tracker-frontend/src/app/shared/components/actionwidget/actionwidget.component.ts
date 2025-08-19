@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Router, UrlSerializer, UrlTree   } from '@angular/router';
+import { CommonModule, NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule,MatIconModule, MatButtonModule ],
   selector: 'app-actionwidget',
   templateUrl: './actionwidget.component.html',
-  styleUrls: ['./actionwidget.component.scss']
+  styleUrls: ['./actionwidget.component.scss'],
 })
 export class ActionwidgetComponent {
   @Input('widgetTitle') widgetTitle: string = 'default action widget title';

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import { environment } from '../../../environments/environment.prod';
 import { environment } from '../../../environments/environment.local';
-import { Exercise } from 'src/app/core/model/exercise';
-import { MuscleGroup } from 'src/app/core/enums/muscle-group';
+import { Exercise } from '../../core/model/exercise';
+import { MuscleGroup } from '../../core/enums/muscle-group';
 
 @Injectable({
   providedIn: 'root'

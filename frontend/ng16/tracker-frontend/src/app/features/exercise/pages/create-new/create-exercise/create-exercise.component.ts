@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ExerciseClass } from 'src/app/core/class/exercise.class';
-import { MuscleGroup } from 'src/app/core/enums/muscle-group';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { ExerciseClass } from '../../../../../core/class/exercise.class';
+import { MuscleGroup } from '../../../../../core/enums/muscle-group';
+import { ExerciseService } from '@old_shared/services/exercise.service';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-exercise',
   templateUrl: './create-exercise.component.html',
-  styleUrls: ['./create-exercise.component.scss']
+  styleUrls: ['./create-exercise.component.scss'],
+  imports: [MatFormFieldModule, ReactiveFormsModule, CommonModule]
 })
 export class CreateExerciseComponent {
-  createExerciseForm: FormGroup = this.fb.group({});
+  createExerciseForm!: FormGroup;
   formControl: FormControl = new FormControl('');
   description: string = '';
   primaryMuscleGroupsList: MuscleGroup[] = [];

@@ -1,3 +1,4 @@
+/*
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module'; 
@@ -42,3 +43,4 @@ import { XychartComponent } from "./shared/components/charts/xychart/xychart/xyc
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+*/

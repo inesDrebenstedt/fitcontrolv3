@@ -1,8 +1,0 @@
-{
-  "/fitcontrol": {
-    "target": "http://fitcontrol-backend-service/fitcontrol/tracker",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}

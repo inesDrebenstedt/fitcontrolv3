@@ -1,13 +1,13 @@
 <div *ngIf="exercise">
-  <h1>{{ exercise.title }}</h1>
-  <p>{{ exercise.description }}</p>
+  <h1>{{ exercise!.title }}</h1>
+  <p>{{ exercise!.description }}</p>
 
   <h2>Primary Muscle Groups</h2>
 
   <ul>
     <li *ngFor="let group of exercise.primaryMuscleGroups">{{ group }}
 
-      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise.primaryMuscleGroups); $event.stopPropagation();"
+      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise!.primaryMuscleGroups); $event.stopPropagation();"
         class="exerciseSetDeleteButton">
         <mat-icon>delete</mat-icon>
       </button>
@@ -33,7 +33,7 @@
   <h2>Secondary Muscle Groups</h2>
   <ul>
     <li *ngFor="let group of exercise.secondaryMuscleGroups">{{ group }}
-      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise.secondaryMuscleGroups); $event.stopPropagation();"
+      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise!.secondaryMuscleGroups); $event.stopPropagation();"
         class="exerciseSetDeleteButton">
         <mat-icon>delete</mat-icon>
       </button>

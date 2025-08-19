@@ -1,32 +1,41 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { WorkoutService } from '../../../../shared/services/workout.service';
 import { ActivatedRoute } from '@angular/router';
-import { Workout } from 'src/app/core/model/workout';
-import { Exercise } from 'src/app/core/model/exercise';
-import { ExerciseSet } from 'src/app/core/model/exercise-set';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { Workout } from '../../../../core/model/workout';
+import { Exercise } from '../../../../core/model/exercise';
+import { ExerciseSet } from '../../../../core/model/exercise-set';
+import { ExerciseService } from '../../../../shared/services/exercise.service';
 import { Router, } from '@angular/router';
 import { WorkoutCreateComponent } from '../workout-create/workout-create.component';
-import { WorkoutExercise } from 'src/app/core/model/workout-exercise';
+import { WorkoutExercise } from '../../../../core/model/workout-exercise';
 import { WeightUnit } from "../../../../core/enums/weight-unit";
-import { Rep } from 'src/app/core/model/rep';
+import { Rep } from '../../../../core/model/rep';
 import { Observable } from 'rxjs';
-import { ExerciseSetClass } from 'src/app/core/class/exerciseset.class';
-import { RepClass } from 'src/app/core/class/rep.class';
-import { RepCategory } from 'src/app/core/enums/rep-category';
+import { ExerciseSetClass } from '../../../../core/class/exerciseset.class';
+import { RepClass } from '../../../../core/class/rep.class';
+import { RepCategory } from '../../../../core/enums/rep-category';
+import { MatIconModule } from "@angular/material/icon";
+import { FormsModule } from '@angular/forms';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelDescription, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-workout-detail',
   templateUrl: './workout-detail.component.html',
-  styleUrls: ['./workout-detail.component.scss']
+  styleUrls: ['./workout-detail.component.scss'],
+  imports: [MatIconModule, FormsModule, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, CommonModule]
 })
 export class WorkoutDetailComponent implements OnInit {
+
 
   navbarTitle: string = 'default workout navbar title';
   workout!: Workout;
   workoutId!: number;
   selectedExerciseId: number | undefined;
   comingFromExerciseSelectionView: boolean | undefined;
+  comingFromListView: boolean | undefined;
+  comingFromWorkoutCreationView: boolean | undefined;
   isAddingSet: boolean = false;
   weightUnits: string[] = Object.values(WeightUnit);
   addSet: boolean | undefined;
@@ -55,15 +64,28 @@ export class WorkoutDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.route.queryParams.subscribe(params => {
       const id = params['workoutId'];
       this.workoutId = id;
 
-      this.workoutService.getWorkout(this.workoutId).subscribe(data => {
-        this.workout = data;
+      if (history.state && history.state.comingFromListView){
+        this.comingFromListView = history.state.comingFromListView;
+      }
 
-        if (history.state && history.state.comingFromExerciseSelectionView) {
+      if (history.state && history.state.comingFromExerciseSelectionView){
+        this.comingFromExerciseSelectionView = history.state.comingFromExerciseSelectionView;
+      }
+
+      if (history.state && history.state.comingFromWorkoutCreationView){
+        this.comingFromWorkoutCreationView = history.state.comingFromWorkoutCreationView;
+      }
+
+      if (!this.comingFromWorkoutCreationView) {
+        this.workoutService.getWorkout(this.workoutId).subscribe(data => {
+          this.workout = data;
+          console.log('****************************** ' + JSON.stringify(this.workout))
+        
+          if (this.comingFromExerciseSelectionView) {
           this.comingFromExerciseSelectionView = history.state.comingFromExerciseSelectionView;
 
           // Get the selected exercise item from router state
@@ -79,10 +101,12 @@ export class WorkoutDetailComponent implements OnInit {
 
           }
         }
+        
+        });
+      }
 
-      });
-    });
-  }
+  });
+}
 
 
   getWorkoutData(workoutId: number): Observable<Workout> {
@@ -173,8 +197,13 @@ export class WorkoutDetailComponent implements OnInit {
         this.workout = data;
       })
       this.isTitleEditMode = false;
-
   }
+
+deleteWorkout(workoutId: number | undefined) {
+  this.workoutService.deleteWorkout(workoutId!);
+
+  this.router.navigate(['/workout/all'], { });
+}
 
 
 }

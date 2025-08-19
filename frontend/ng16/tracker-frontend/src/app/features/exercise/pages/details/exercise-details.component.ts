@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MuscleGroup } from 'src/app/core/enums/muscle-group';
-import { Exercise } from 'src/app/core/model/exercise';
-import { ExerciseSet } from 'src/app/core/model/exercise-set';
-import { ExerciseService } from 'src/app/shared/services/exercise.service';
+import { MuscleGroup } from '../../../../core/enums/muscle-group';
+import { Exercise } from '../../../../core/model/exercise';
+import { ExerciseSet } from '../../../../core/model/exercise-set';
+import { ExerciseService } from '@old_shared/services/exercise.service';
+import { MatIconModule } from "@angular/material/icon";
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-exercise-details',
   templateUrl: './exercise-details.component.html',
-  styleUrls: ['./exercise-details.component.scss']
+  styleUrls: ['./exercise-details.component.scss'],
+  imports: [MatIconModule, ReactiveFormsModule, CommonModule]
 })
 export class ExerciseDetailsComponent {
 
@@ -23,8 +28,8 @@ export class ExerciseDetailsComponent {
 
   ) { }
 
-  editPrimaryMuscleGroupsForm: FormGroup = this.fb.group({});
-  editSecondaryMuscleGroupsForm: FormGroup = this.fb.group({});
+  editPrimaryMuscleGroupsForm!: FormGroup;
+  editSecondaryMuscleGroupsForm!: FormGroup;
   navbarTitle: string = 'default workout navbar title';
   exercise: Exercise | undefined;
   primaryMuscleGroupsList: MuscleGroup[] = [];

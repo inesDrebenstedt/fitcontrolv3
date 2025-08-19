@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Router, UrlSerializer, UrlTree   } from '@angular/router';
-
+import { CommonModule} from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-actionwidget-blue',
   templateUrl: './actionwidget-blue.component.html',
   styleUrls: ['./actionwidget-blue.component.scss']

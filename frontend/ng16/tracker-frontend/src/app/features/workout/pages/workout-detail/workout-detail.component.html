@@ -6,16 +6,6 @@
   
   <h1>{{ workout.title }}</h1>
   -->
-  <br>
-  <!--TODO: make button edit workout, when in edit mode show save workout button-->
-  <button class="save-workout-button" mat-raised-button color="accent" (click)="saveWorkout(workout)">
-    Save Workout
-  </button>
-
-  <button class="create-workout-from-template-button" mat-raised-button color="primary"
-    (click)="createWorkoutWithTemplate(workout)">
-    <span class="create-workout-from-template-button-title">Create new Workout with this one as template</span>
-  </button>
 
   <div class="workout-titlesection">
     <div style="display: block;">
@@ -123,6 +113,7 @@
           <mat-icon>add</mat-icon>
           Add Set
         </button>
+
       </div>
     </mat-expansion-panel>
     <br>
@@ -134,6 +125,25 @@
     </button>
     <br>
   </mat-accordion>
+
+  <br>
+  <!--TODO: make button edit workout, when in edit mode show save workout button-->
+  <button class="save-workout-button" mat-raised-button color="accent" (click)="saveWorkout(workout)">
+    Save Workout
+  </button>
+
+  <button class="create-workout-from-template-button" mat-raised-button color="primary"
+    (click)="createWorkoutWithTemplate(workout)">
+    <span class="create-workout-from-template-button-title">Create new Workout with this one as template</span>
+  </button>
+
+  <div>
+    <button class="delete-workout-button" mat-raised-button color="accent" (click)="deleteWorkout(workout!.id)">
+      <mat-icon>delete</mat-icon>
+        Delete 
+    </button>
+  </div>
+
 </div>
 
 <!--

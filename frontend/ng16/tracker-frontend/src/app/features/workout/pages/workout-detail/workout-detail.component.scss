@@ -7,11 +7,21 @@
     left: 82%;
 }
 
+.delete-workout-button {
+    color:crimson;
+    position: relative;
+    left: 82%;
+    margin-top: 15%;
+    height: 40px;
+    width: 90px;
+}
+
 .create-workout-from-template-button {
   position: absolute;
   left: 82%;
   top: 50%;
   height: fit-content;
+  width: 90px;
 }
 
 .create-workout-from-template-button-title {
@@ -21,7 +31,7 @@
 .exercise-list {
     position: absolute;
     top: 32%;
-    margin-left: 1%;
+    margin-left: 5%;
     width: 80%;
 }
 
@@ -104,8 +114,9 @@
   :host ::ng-deep  .workout-titlesection {
     position: absolute;
     transform: translateX(5%) translateY(-38%); /* Optional: center vertically if needed */
-    margin-left: 12%;
+    margin-left: 18%;
     margin-bottom: 2%;
+    margin-top: 5%;
   }
 
   :host ::ng-deep   .workout-title {

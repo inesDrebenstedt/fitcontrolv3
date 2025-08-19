@@ -1,7 +1,7 @@
 <mat-card appearance="outlined">
     <mat-card-header *ngIf="workout && workoutexercise">
-      <mat-card-title > {{workoutexercise.title}} </mat-card-title>
-      <mat-card-subtitle>{{workout.title}} | {{workout.date}} </mat-card-subtitle>
+      <mat-card-title > {{workoutexercise!.title}} </mat-card-title>
+      <mat-card-subtitle>{{workout!.title}} | {{workout!.date}} </mat-card-subtitle>
     </mat-card-header>
     <!--
     <mat-card-actions>
