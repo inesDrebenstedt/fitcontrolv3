@@ -107,7 +107,7 @@ export class WorkoutDetailComponent implements OnInit {
 
   addSetTo(workoutExercise: WorkoutExercise, addSet: boolean) {
     this.addSet = addSet;
-    let newExerciseDefaultSet: ExerciseSet = new ExerciseSetClass(0, 0, WeightUnit.kg, "", [], 0, workoutExercise.id!, true);
+    let newExerciseDefaultSet: ExerciseSet = new ExerciseSetClass(workoutExercise.sets.length+1, 0, WeightUnit.kg, "", [], 0, workoutExercise.id!, true);
     workoutExercise.sets.push(newExerciseDefaultSet);
   }
 
@@ -127,8 +127,12 @@ export class WorkoutDetailComponent implements OnInit {
     });
   }
 
-  saveSet(set: ExerciseSet, workoutExerciseId: number) {
-    this.workoutService.saveSet(set, workoutExerciseId!).subscribe();
+  saveSet(set: ExerciseSet, workoutExercise: WorkoutExercise) {
+    for (let i = 0; i < set.numberOfReps; i++) {
+      let newRep = new RepClass(undefined, RepCategory.full_ROM, undefined,false)
+      set.reps.push(newRep)
+    }
+    this.workoutService.saveSet(set, workoutExercise.id!).subscribe();
     set.isEditing = false; // Exit the edit mode
   }
 

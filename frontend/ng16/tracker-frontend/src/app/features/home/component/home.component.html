@@ -1,9 +1,14 @@
 
-<div *ngFor="let title of widgetTitles">
-    <app-actionwidget [widgetTitle]="title" ></app-actionwidget>
+<div class="dashboard" >
+  <div class="tile-container" >
+    <app-actionwidget-blue *ngFor="let title of widgetTitles" [widgetTitle]="title" ></app-actionwidget-blue>
   </div>
+  <div class="createbutton-container">
+    <app-actionwidget *ngFor="let title of actionTitles" [widgetTitle]="title" ></app-actionwidget>
+  </div>
+</div>
   
-
+<!--  
   <div class="dashboard">
     <h1>Dashboard</h1>
     <div class="tile-container">
@@ -33,3 +38,4 @@
       </div>
     </div>
   </div>
+  -->

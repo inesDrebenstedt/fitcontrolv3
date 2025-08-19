@@ -1,21 +1,15 @@
-.dashboard {
-    padding: 20px;
-    text-align: center;
-    margin-left: 30%;
-    margin-top: 5%;
+  .test {
+    //padding: 20px;
+    //text-align: center;
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping if not enough space */
+  gap: 20px;       /* space between tiles */
   }
   
   .tile-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 25px;
-  }
-
-  .createbutton-container {
-    margin-left: -12pt;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 25px;
+    gap: 20px;
   }
   
   .tile {
@@ -34,9 +28,4 @@
   
   .tile p {
     margin: 5px 0 0;
-  }
-  
-  .tile:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }

@@ -1,28 +1,35 @@
-# Stage 1: Build the Angular application
-FROM node:16-alpine AS build
+# Stage 1: Build the Angular app
+FROM node:18 AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy dependency files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm config set registry https://registry.npmjs.org/ && \
-    npm config set timeout 60000 && \
-    npm install
+RUN npm install
 
-# Copy the rest of the application
+# Copy the rest of the app
 COPY . .
 
-# Build the Angular application
-RUN npm run build --prod
+# Build Angular app for production
+RUN npm run build -- --configuration production
 
-# Stage 2: Serve the application with nginx
-FROM nginx:alpine
+# Stage 2: Serve with Nginx
+FROM nginx:1.25-alpine
 
-# Copy the built Angular application from the build stage to the NGINX html directory
+# Remove default nginx static files
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy Angular dist from build stage
 COPY --from=build /app/dist/tracker-frontend /usr/share/nginx/html
 
-# Expose port 80
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+
+# Copy custom nginx config if needed
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

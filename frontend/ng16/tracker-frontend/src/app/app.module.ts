@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StopClickPropagationDirective } from './directives/stop-click-propagation.directive';
 import { LoginComponent } from './features/login/login/login.component';
 import { LoginModule } from './features/login/login.module';
+import { XychartComponent } from "./shared/components/charts/xychart/xychart/xychart.component";
 
 @NgModule({
   declarations: [AppComponent, 
@@ -22,18 +23,18 @@ import { LoginModule } from './features/login/login.module';
     
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     HttpClientModule,
-    AppRoutingModule, 
-    HomeModule, 
+    AppRoutingModule,
+    HomeModule,
     WorkoutModule,
     WorkoutExerciseModule,
     ExerciseModule,
     SharedModule,
     LoginModule,
     BrowserAnimationsModule,
-
-  ], 
+    XychartComponent
+], 
   providers: [
     WorkoutService, 
     ExerciseService

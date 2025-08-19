@@ -10,6 +10,7 @@ export class HomeComponent {
     throw new Error('Method not implemented.');
   }
   navbarTitle: string = 'Home Page';
-  widgetTitles: Array<string> = ["Workouts list", "Create Workout", "Exercise List", "Create Exercise"];
+  actionTitles: Array<string> = ["Create Workout", "Create Exercise"];
+  widgetTitles: Array<string> = ["Workouts list", "Exercise List"];
 
 }

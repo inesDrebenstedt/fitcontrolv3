@@ -1,6 +1,6 @@
 export interface Rep {
     id?: number;
     category: string;
-    exerciseSetId: number;
+    exerciseSetId?: number;
     isEditing?: boolean;
   }

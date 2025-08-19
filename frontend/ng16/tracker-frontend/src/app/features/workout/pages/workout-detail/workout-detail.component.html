@@ -109,7 +109,7 @@
 
                 <input [(ngModel)]="set.numberOfReps" type="number" placeholder="Reps" />
 
-                <button mat-icon-button (click)="saveSet(set, workoutexercise.id!); $event.stopPropagation();">
+                <button mat-icon-button (click)="saveSet(set, workoutexercise); $event.stopPropagation();">
                   <mat-icon>save</mat-icon>
                 </button>
                 <button mat-icon-button (click)="editSet(set); $event.stopPropagation();">

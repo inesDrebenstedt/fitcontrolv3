@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from './../../../../src/environments/environment.local';
+//import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment.local';
 import { Exercise } from 'src/app/core/model/exercise';
 import { MuscleGroup } from 'src/app/core/enums/muscle-group';
 
@@ -11,13 +12,16 @@ import { MuscleGroup } from 'src/app/core/enums/muscle-group';
 export class ExerciseService {
 
 
-  private apiUrl = `${environment.apiBaseUrl}/exercise`;
+  // private apiUrl = `${environment.apiBaseUrl}/exercise`;
+  //private apiUrl = `/exercise`; // or ingress
+  private apiUrl = `${environment.apiUrl}/exercise`;
   exercise: Exercise | undefined;
 
 
   constructor(private http: HttpClient) { }
 
   getExercises(): Observable<Exercise[]> {
+        console.log('............  getExercises ' + this.apiUrl )
     return this.http.get<Exercise[]>(`${this.apiUrl}/all`);
   }
 

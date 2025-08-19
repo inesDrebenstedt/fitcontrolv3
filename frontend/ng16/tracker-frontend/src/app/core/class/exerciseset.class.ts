@@ -4,7 +4,7 @@ import { Rep } from "../model/rep";
 import { WorkoutExercise } from "../model/workout-exercise";
 
 export class ExerciseSetClass implements ExerciseSet {
-    id: number;
+    id?: number;
     weight: number;
     unit: WeightUnit;
     description: string;
@@ -14,7 +14,7 @@ export class ExerciseSetClass implements ExerciseSet {
     isEditing: boolean;
 
     constructor(
-        id: number, 
+        id: number | undefined, 
         weight: number, 
         unit: WeightUnit, 
         description: string, 

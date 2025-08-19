@@ -1,0 +1,8 @@
+{
+  "/fitcontrol": {
+    "target": "http://fitcontrol-backend-service.wt-stage-ns.svc.cluster.local/fitcontrol/tracker",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

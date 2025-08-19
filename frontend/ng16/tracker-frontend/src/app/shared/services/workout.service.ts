@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+//import { environment } from './../../../../src/environments/environment.prod';
 import { environment } from './../../../../src/environments/environment.local';
 import { Workout } from 'src/app/core/model/workout';
 import { WorkoutExercise } from 'src/app/core/model/workout-exercise';
@@ -11,7 +12,9 @@ import { ExerciseSet } from 'src/app/core/model/exercise-set';
 })
 export class WorkoutService {
 
-  private apiUrl = `${environment.apiBaseUrl}/workout`;
+  //private apiUrl = `${environment.apiBaseUrl}/workout`;
+  //private apiUrl = `/workout`; // for ingress
+  private apiUrl = `${environment.apiUrl}/workout`;
   private selectedWorkout?: Workout; 
 
   constructor(private http: HttpClient) { }
@@ -25,7 +28,7 @@ export class WorkoutService {
   }
 
   getWorkouts(): Observable<Workout[]> {
-    console.log('............ WorkoutService getWorkouts ' )
+    console.log('............ WorkoutService getWorkouts ' + this.apiUrl )
     return this.http.get<Workout[]>(`${this.apiUrl}/all`);
   }
 
@@ -75,7 +78,7 @@ export class WorkoutService {
   }
 
   saveSet( set: ExerciseSet, workoutExerciseId: number): Observable<ExerciseSet> {
-    console.log('??????????????????? ' + set.reps.length)
+    console.log('workoutservice saveSet: ' + set.reps.length)
     return this.http.post<ExerciseSet>(`${this.apiUrl}/saveExerciseSet`, set,  {
       params: {
         workoutExerciseId: workoutExerciseId
