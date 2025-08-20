@@ -3,6 +3,7 @@ import { ActionwidgetBlueComponent } from "@old_shared/components/actionwidget-b
 import { ActionwidgetComponent } from "@old_shared/components/actionwidget/actionwidget.component";
 import { CommonModule} from '@angular/common';
 import { XychartComponent } from "@old_shared/components/charts/xychart/xychart/xychart.component";
+import { WorkoutService } from '@old_shared/services/workout.service';
 
 @Component({
   standalone: true, 
@@ -12,11 +13,20 @@ import { XychartComponent } from "@old_shared/components/charts/xychart/xychart/
   imports: [ActionwidgetBlueComponent, ActionwidgetComponent, CommonModule, XychartComponent],
 })
 export class HomeComponent {
+
+    constructor(
+    private workoutService: WorkoutService
+  ) { }
+
   onAction(arg0: string) {
     throw new Error('Method not implemented.');
   }
   navbarTitle: string = 'Home Page';
   actionTitles: Array<string> = ["Create Workout", "Create Exercise"];
   widgetTitles: Array<string> = ["Workouts list", "Exercise List"];
+
+  showPrimaryMuscleGroupStats() {
+  this.workoutService.getPrimaryMuscleGroupStats();
+}
 
 }

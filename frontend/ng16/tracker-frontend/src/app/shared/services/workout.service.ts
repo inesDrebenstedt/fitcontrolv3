@@ -37,6 +37,12 @@ export class WorkoutService {
     return this.http.get<Workout>(`${this.apiUrl}/singleworkout?workoutId=${id}`);
   }
 
+  getPrimaryMuscleGroupStats(){
+    return this.http.get<Workout>(`${this.apiUrl}/primarymusclegroupstats`).subscribe(data => {
+    console.log(data);
+  });
+  }
+
     findWorkoutByTitleAndCreationDate(title: string, creationTime: Date): Observable<Workout> {
     console.log('............ WorkoutService findWorkoutByTitleAndCreationDate '  + title + ', ' + creationTime)
     return this.http.get<Workout>(`${this.apiUrl}/createdworkout?title=${title}?creationTime=${creationTime}`);

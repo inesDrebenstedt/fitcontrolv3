@@ -8,6 +8,7 @@ import { WorkoutCreateComponent } from './features/workout/pages/workout-create/
 import { WorkoutDetailComponent } from './features/workout/pages/workout-detail/workout-detail.component';
 import { WorkoutListComponent } from './features/workout/pages/workout-list/workout-list.component';
 import { WorkoutexerciseDetailComponent } from './features/workoutexercise/pages/workoutexercise-detail/workoutexercise-detail.component';
+import { XychartComponent } from '@old_shared/components/charts/xychart/xychart/xychart.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'workout/createdworkout', component: WorkoutDetailComponent },
   { path: 'workout/create', component: WorkoutCreateComponent },
   { path: 'workout/workoutexercise', component: WorkoutexerciseDetailComponent },
+  { path: 'workout/primarymusclegroupstats', component: XychartComponent },
   { path: 'exercise/all', component: ExerciseListComponent },
   { path: 'exercise/singleexercise', component: ExerciseDetailsComponent },
   { path: 'exercise/select', component: SelectExerciseComponent },
