@@ -2,6 +2,7 @@ package de.fitcontrol.fitcontrol.config;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +18,46 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless API
+            .authorizeHttpRequests(auth -> auth
+                //.requestMatchers("/login**", "/oauth2/**", "/callback/**").permitAll() // Public endpoint
+                //.requestMatchers("/**").authenticated() // Protected endpoint
+                .anyRequest().authenticated() // All other requests require authentication
+            )
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {})); // Configure JWT resource server
+
+        return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Angular app origin
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+	
+	
+	
+	/*
 	
     private final String KEYCLOAK_LOGOUT_URI = "http://localhost:8081/realms/fitcontrol-realm/protocol/openid-connect/logout";
     
@@ -62,7 +98,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); // Your Angular frontend URL
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8081", "http://localhost:8083")); // Your Angular frontend URL
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "X-CSRF-TOKEN"));
         configuration.setAllowCredentials(true); // Allow sending cookies (JSESSIONID, XSRF-TOKEN)
@@ -83,9 +119,11 @@ public class SecurityConfig {
         // from Keycloak itself. This MUST be registered in Keycloak as a valid
         // "Post Logout Redirect URI" for your client.
         oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://localhost:4200"); // Your Angular app's base URL
-System.out.println("--------------- LOGOUT Success handler");
+        log.atDebug().log("--------------- LOGOUT Success handler");
         return oidcLogoutSuccessHandler;
     }
+    
+*/  
     
     
     /*
