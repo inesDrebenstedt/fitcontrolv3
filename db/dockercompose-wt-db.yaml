@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: fitcontroldb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: fitcontroldb
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+volumes:
+  mariadb-data:

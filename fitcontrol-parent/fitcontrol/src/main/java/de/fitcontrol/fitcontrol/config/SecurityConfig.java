@@ -1,19 +1,18 @@
 package de.fitcontrol.fitcontrol.config;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -26,7 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 @EnableWebSecurity
 public class SecurityConfig {
 	
+    private final String KEYCLOAK_LOGOUT_URI = "http://localhost:8081/realms/fitcontrol/protocol/openid-connect/logout";
+
 	
+    @Value("${app.angular-logout-redirect-uri}")
+    private String angularLogoutRedirectUri;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,11 +37,15 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless API
             .authorizeHttpRequests(auth -> auth
-                //.requestMatchers("/login**", "/oauth2/**", "/callback/**").permitAll() // Public endpoint
-                //.requestMatchers("/**").authenticated() // Protected endpoint
+                .requestMatchers("/login**", "/oauth2/**", "/callback/**").permitAll() // Public endpoint
+                //.requestMatchers("/logout", "/user-info").authenticated() // Protected endpoint
                 .anyRequest().authenticated() // All other requests require authentication
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {})); // Configure JWT resource server
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+            .logout(logout -> logout
+            	    //.logoutSuccessUrl(angularLogoutRedirectUri))
+            		.addLogoutHandler(keycloakLogoutHandler()))
+            ; // Configure JWT resource server
 
         return http.build();
     }
@@ -55,7 +62,31 @@ public class SecurityConfig {
         return source;
     }
 	
-	
+    private LogoutHandler keycloakLogoutHandler() {
+        return (request, response, authentication) -> {
+            try {
+                // Perform local logout first
+                new SecurityContextLogoutHandler().logout(request, response, authentication);
+
+                // Redirect to Keycloak's logout endpoint
+                // Keycloak will then redirect back to the `post_logout_redirect_uri`
+                // if configured in Keycloak client settings, otherwise to Keycloak's login page.
+                // For this example, we simply redirect back to Keycloak's logout and let
+                // Keycloak handle the final redirection after its session is terminated.
+                String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+                //response.sendRedirect(KEYCLOAK_LOGOUT_URI + "?post_logout_redirect_uri=" + redirectUri);
+                response.sendRedirect(KEYCLOAK_LOGOUT_URI);
+
+            } catch (Exception e) {
+                System.err.println("Error during Keycloak logout: " + e.getMessage());
+            }
+        };
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 	
 	/*
 	

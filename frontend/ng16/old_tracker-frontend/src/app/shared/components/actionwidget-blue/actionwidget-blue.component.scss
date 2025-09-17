@@ -1,0 +1,31 @@
+  .test {
+    //padding: 20px;
+    //text-align: center;
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping if not enough space */
+  gap: 20px;       /* space between tiles */
+  }
+  
+  .tile-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .tile {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: left;
+  }
+  
+  .tile h2 {
+    margin: 0;
+  }
+  
+  .tile p {
+    margin: 5px 0 0;
+  }

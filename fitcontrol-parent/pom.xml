@@ -41,6 +41,14 @@
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-logging</artifactId>
+    <!-- 
+    <exclusions>
+		<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</exclusion>
+	</exclusions>
+	-->
 </dependency>
 		        <dependency>
             <groupId>org.projectlombok</groupId>
@@ -119,7 +127,7 @@
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -178,6 +186,10 @@
                 </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-jar-plugin</artifactId>
+    		</plugin>
         </plugins>
     </build>
 

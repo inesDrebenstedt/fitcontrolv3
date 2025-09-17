@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { WorkoutService } from '../../../shared/services/workout.service';
 import { ExerciseService } from '../../../shared/services/exercise.service';
@@ -26,6 +26,8 @@ export class NavbarComponent {
   navbarTitle: string = ' ';
   currentUrl: string = '';
   notInLoginMode = true;
+  @Input('userDisplayName')
+  userDisplayName: any;
 
   constructor(
     private router: Router,
@@ -40,8 +42,10 @@ export class NavbarComponent {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.urlAfterRedirects;
         this.navbarTitle = this.updateTitleBar();
+        //this.userDisplayName = this.updateUserInfo()
       }
     });
+
   }
 
 
@@ -71,6 +75,7 @@ export class NavbarComponent {
 
 
   updateTitleBar(): string {
+    console.log('===================== ' + this.userDisplayName)
 
     if (this.currentUrl.includes('/workout/singleworkout')) {
       return this.getWorkoutTitle();
@@ -117,7 +122,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.authService.logout();
+    //this.authService.logout();
     window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout';
   }
 

@@ -1,0 +1,55 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let item of items" #panel [expanded]="item.expanded" [hideToggle]="false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ item.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <button mat-icon-button (click)="deleteItem(item); $event.stopPropagation();">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <div>
+        <h3>Sub-items</h3>
+        <div class="titles">
+          <span>Description</span>
+          <span>Actions</span>
+        </div>
+        <ol>
+          <li *ngFor="let subItem of item.subItems">
+            <ng-container *ngIf="!subItem.isEditing; else editMode">
+              <div class="values">
+                <span>{{ subItem.description }}</span>
+  
+                <button mat-icon-button (click)="editSubItem(subItem); $event.stopPropagation();">
+                  <mat-icon>edit</mat-icon>
+                </button>
+  
+                <button mat-icon-button (click)="deleteSubItem(item, subItem); $event.stopPropagation();">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+  
+            <ng-template #editMode>
+              <input [(ngModel)]="subItem.description" placeholder="Description" />
+              <button mat-icon-button (click)="saveSubItem(subItem); $event.stopPropagation();">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button mat-icon-button (click)="cancelEdit(subItem); $event.stopPropagation();">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </ng-template>
+          </li>
+        </ol>
+  
+        <button mat-raised-button color="accent" (click)="addSubItem(item); $event.stopPropagation();">
+          <mat-icon>add</mat-icon>
+          Add Sub-item
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  

@@ -1,0 +1,126 @@
+.workout-detail{
+    left: 15%;
+}
+
+.save-workout-button {
+    position: absolute;
+    left: 82%;
+}
+
+.create-workout-from-template-button {
+  position: absolute;
+  left: 82%;
+  top: 50%;
+  height: fit-content;
+}
+
+.create-workout-from-template-button-title {
+  padding: 5px;
+}
+
+.exercise-list {
+    position: absolute;
+    top: 32%;
+    margin-left: 1%;
+    width: 80%;
+}
+
+.titles, .values {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start; /* Align items to the start */
+    margin-bottom: 5px;
+  }
+
+  .titles span, .values span {
+    width: 150px; /* Set a fixed width for each item */
+    text-align: center; /* Center text within each cell */
+    display: block; /* Ensure each span takes up the full width of the cell */
+  }
+  
+  .titles {
+    position: relative;
+    left: 4%;
+    font-weight: bold;
+  }
+  
+  .values {
+    position: relative;
+    font-weight: normal;
+  }
+
+  :host ::ng-deep  .exerciseSetEditButton {
+    position: relative;
+    transform: translateX(-10%) translateY(-38%); /* Optional: center vertically if needed */
+    display: flex;
+    align-items: center;
+  }
+
+  :host ::ng-deep  .exerciseSetDeleteButton {
+    position: relative;
+    transform: translateX(-45%) translateY(-21%); /* Optional: center vertically if needed */
+    left: 7%;
+    top: 25%;
+    display: flex;
+    align-items: center;
+  }
+
+  :host ::ng-deep  .see-details-workoutexercise-button  {
+    position: relative;
+    transform: translateX(-75%) translateY(-21%); /* Optional: center vertically if needed */
+    left: 10%;
+    top: 25%;
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .custom-dropdown {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    color: grey;
+    font-style: italic;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-dropdown:not(:placeholder-shown) + .placeholder,
+  .custom-dropdown:focus + .placeholder {
+    opacity: 0; /* Hide the placeholder when dropdown has a value or is focused */
+  }
+
+  :host ::ng-deep  .workout-titlesection {
+    position: absolute;
+    transform: translateX(5%) translateY(-38%); /* Optional: center vertically if needed */
+    margin-left: 12%;
+    margin-bottom: 2%;
+  }
+
+  :host ::ng-deep   .workout-title {
+    font-weight: 500;
+    font-size: 1.2em;
+    margin-right: 2em;
+    margin-bottom: 3em;
+  }
+
+  :host ::ng-deep  .titleEditButton {
+    position: relative;
+    transform: translateX(-75%) translateY(4%); /* Optional: center vertically if needed */
+    align-items: center;
+    
+  }
+
+
+  

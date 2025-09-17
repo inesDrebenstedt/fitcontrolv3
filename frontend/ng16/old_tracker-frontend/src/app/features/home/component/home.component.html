@@ -1,0 +1,41 @@
+
+<div class="dashboard" >
+  <div class="tile-container" >
+    <app-actionwidget-blue *ngFor="let title of widgetTitles" [widgetTitle]="title" ></app-actionwidget-blue>
+  </div>
+  <div class="createbutton-container">
+    <app-actionwidget *ngFor="let title of actionTitles" [widgetTitle]="title" ></app-actionwidget>
+  </div>
+</div>
+  
+<!--  
+  <div class="dashboard">
+    <h1>Dashboard</h1>
+    <div class="tile-container">
+      <div class="tile" (click)="onAction('action1')">
+        <div class="tile-content">
+          <h2>Action 1</h2>
+          <p>Perform action 1 description.</p>
+        </div>
+      </div>
+      <div class="tile" (click)="onAction('action2')">
+        <div class="tile-content">
+          <h2>Action 2</h2>
+          <p>Perform action 2 description.</p>
+        </div>
+      </div>
+      <div class="tile" (click)="onAction('action3')">
+        <div class="tile-content">
+          <h2>Action 3</h2>
+          <p>Perform action 3 description.</p>
+        </div>
+      </div>
+      <div class="tile" (click)="onAction('action4')">
+        <div class="tile-content">
+          <h2>Action 4</h2>
+          <p>Perform action 4 description.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Output } from '@angular/core';
 import { Router, RouterOutlet } from "@angular/router";
 import { NavbarComponent } from "@shared/components/navbar/navbar.component"; // Ensure paths are correct
 import { RouterModule } from '@angular/router';
@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'tracker-frontend';
   userInfo: string = 'Loading user info...';
+  @Output('userDisplayName')
   userDisplayName: string = '';
   publicApiResponse: string = 'Not called';
   protectedApiResponse: string = 'Not called';
@@ -26,12 +27,20 @@ export class AppComponent implements OnInit {
   constructor(private oauthService: OAuthService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.updateUserDisplay();
+    //this.updateUserDisplay();
     this.oauthService.events.subscribe(e => {
       if (e.type === 'token_received' || e.type === 'token_refreshed' || e.type === 'user_profile_loaded') {
         this.updateUserDisplay();
       }
     });
+    this.fetchUserInfo();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('--------this.userDisplayName------ ' + this.userDisplayName)
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    
   }
 
   updateUserDisplay() {
@@ -69,70 +78,23 @@ export class AppComponent implements OnInit {
     });
   }
 
-  //ngOnInit(): void {
-    // On initial load, always try to fetch user info.
-    // If it fails (e.g., due to 401/403/network error indicating unauthenticated state),
-    // then we'll trigger the full browser redirect.
-    //this.fetchUserInfo();
-  //}
 
-  /*
-  fetchUserInfo() {
-    // This is the endpoint that Spring Boot protects.
-    const userInfoApiUrl = '/fitcontrol/tracker/api/user-info';
-    // This is the endpoint that initiates the OAuth2 flow on Spring Boot.
-    const springBootAuthUrl = 'http://localhost:8083/fitcontrol/tracker/oauth2/authorization/keycloak';
-
-    this.http.get(userInfoApiUrl, { withCredentials: true, responseType: 'text' }).pipe(
-      tap((data: string) => {
-        // If successful, display the user info
-        this.userInfo = data;
-        //this.userInfo = JSON.stringify(data, null, 2); // Pretty print JSON
-        console.log('Successfully fetched user info:', data);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        console.error('Error fetching user info:', error);
-
-        if (error.status === 401 || error.status === 403 || error.status === 0) {
-          console.log('User is not authenticated. Redirecting full browser to Spring Boot for Keycloak login...');
-
-          window.location.href = springBootAuthUrl;
-        } else {
-          this.userInfo = `Error fetching user info: ${error.message || 'Unknown error'}`;
-        }
-        return of(null); // Return an observable of null to complete the stream gracefully
-      })
-    ).subscribe(
-      // The subscribe block now primarily logs success. Errors are handled in catchError.
-      // If `data` is null, it means `catchError` was hit and `of(null)` was returned.
-      (data) => {
-        if (data === null) {
-          console.log('Redirect initiated, subscription completed gracefully.');
-        }
-      },
-      (error) => {
-        // This error callback will only be hit if there's an error *after* catchError,
-        // which should ideally not happen if `of(null)` is returned.
-        console.error('Uncaught error in subscribe after catchError:', error);
-      }
-    );
-  }
-  */
-
-  /*
   fetchUserInfo(){
-    this.http.get('/api/user-info', { withCredentials: true }).subscribe({
+    this.http.get<any>('http://localhost:8083/fitcontrol/tracker/user-info', { withCredentials: true }).subscribe({
   next: data => { 
     console.log('Successfully fetched user info:', data);
+    this.userDisplayName = data.preferred_username;
+    console.log('-------------------- NAME: ' + this.userDisplayName);
    },
   error: err => {
     if (err.status === 401 || err.status === 403) {
+      console.log('-------------ERROR')
       // redirect the whole browser to backend's oauth2 login endpoint
-      window.location.href = 'http://localhost:8083/oauth2/authorization/keycloak';
+      //window.location.href = 'http://localhost:8083/oauth2/authorization/keycloak';
     }
   }
 });
 
   }
-*/
+
 }

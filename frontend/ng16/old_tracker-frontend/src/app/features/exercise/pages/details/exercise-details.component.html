@@ -1,0 +1,76 @@
+<div *ngIf="exercise">
+  <h1>{{ exercise.title }}</h1>
+  <p>{{ exercise.description }}</p>
+
+  <h2>Primary Muscle Groups</h2>
+
+  <ul>
+    <li *ngFor="let group of exercise.primaryMuscleGroups">{{ group }}
+
+      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise.primaryMuscleGroups); $event.stopPropagation();"
+        class="exerciseSetDeleteButton">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </li>
+    <form 
+    class="new-exercise-formgroup"
+    [formGroup]="editPrimaryMuscleGroupsForm" 
+    >
+    <select formControlName="primaryMuscleGroupsListInFg">
+      <option value="" disabled selected>Select Muscle Group</option>
+      <option *ngFor="let mg of muscleGroupValues" [value]="mg">{{ mg }}</option>
+    </select>
+    <!-- Button to add the selected item to the list -->
+    <button class="add-mg-button" mat-raised-button color="primary" type="button"
+      (click)="addMuscleGroup(primaryMuscleGroupsList,  'primaryMuscleGroupsList')">
+      Add Item
+    </button>
+  </form>
+
+  </ul>
+
+  <h2>Secondary Muscle Groups</h2>
+  <ul>
+    <li *ngFor="let group of exercise.secondaryMuscleGroups">{{ group }}
+      <button mat-icon-button (click)="deleteMuscleGroupFrom(exercise.secondaryMuscleGroups); $event.stopPropagation();"
+        class="exerciseSetDeleteButton">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </li>
+
+  <form 
+  class="new-exercise-formgroup"
+  [formGroup]="editSecondaryMuscleGroupsForm" 
+  >
+    <select formControlName="secondaryMuscleGroupsListInFg">
+      <option value="" disabled selected>Select Muscle Group</option>
+      <option *ngFor="let mg of muscleGroupValues" [value]="mg">{{ mg }}</option>
+    </select>
+    <!-- Button to add the selected item to the list -->
+    <button class="add-mg-button" mat-raised-button color="primary" type="button"
+      (click)="addMuscleGroup(secondaryMuscleGroupsList, 'secondaryMuscleGroupsList')">
+      Add Item
+    </button>
+  </form>
+  </ul>
+
+  <!-- Save Button -->
+  <button 
+  (click)="onSubmit()"
+  mat-raised-button 
+  color="primary" 
+  type="submit">
+  Save this new Exercise
+</button>
+
+  <!-- Delete Button -->
+  <button 
+  (click)="onDelete()"
+  mat-raised-button 
+  color="accent" 
+  type="submit">
+  Delete this Exercise
+</button>
+
+</div>

@@ -9,7 +9,7 @@
     </button>
     <span id="navbar-title" class="navbar-spacer">{{ navbarTitle }}</span>
 
-    <button 
+  <button 
     *ngIf="notInLoginMode"
     mat-icon-button
     [matMenuTriggerFor]="menu" 
@@ -41,6 +41,8 @@
       <span>Log out</span>
     </button>
   </mat-menu>
+
+<span id="navbar-title" class="username-display">You are logged in as: {{ userDisplayName }}</span>
   
 
     <!--

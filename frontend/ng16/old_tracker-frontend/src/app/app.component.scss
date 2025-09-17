@@ -1,0 +1,18 @@
+ .add-exercise-button {
+     padding: 10px 20px;
+     font-size: 16px;
+     color: white;
+     background-color: #007bff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     outline: none;
+     transition: transform 0.2s, box-shadow 0.2s;
+ }
+
+ .add-exercise-button:active {
+     transform: scale(0.95);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+ }
+
+ //TODO: gucken, ob Auswirkung oder ob nötig

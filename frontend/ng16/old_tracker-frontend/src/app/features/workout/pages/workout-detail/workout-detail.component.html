@@ -1,0 +1,143 @@
+<div *ngIf="workout" class="workout-detail">
+  <!--
+  <mat-card appearance="outlined">
+    <mat-card-content>{{ workout.title }}</mat-card-content>
+  </mat-card>
+  
+  <h1>{{ workout.title }}</h1>
+  -->
+  <br>
+  <!--TODO: make button edit workout, when in edit mode show save workout button-->
+  <button class="save-workout-button" mat-raised-button color="accent" (click)="saveWorkout(workout)">
+    Save Workout
+  </button>
+
+  <button class="create-workout-from-template-button" mat-raised-button color="primary"
+    (click)="createWorkoutWithTemplate(workout)">
+    <span class="create-workout-from-template-button-title">Create new Workout with this one as template</span>
+  </button>
+
+  <div class="workout-titlesection">
+    <div style="display: block;">
+
+      <ng-container *ngIf="!isTitleEditMode; else titleEditMode">
+        <span class="workout-title">
+          {{workout.title}}
+        </span>
+        <button mat-icon-button  (click)="editTitleModeOn()" class="titleEditButton">
+          <mat-icon  style="font-size: 18px; transform: translateX(-5%) translateY(14%);">edit</mat-icon>
+        </button>
+      </ng-container>
+
+      <ng-template #titleEditMode>
+        <input [(ngModel)]="workout.title" placeholder="Workout title" />
+
+        <button mat-icon-button (click)="saveTitle(workout.title); $event.stopPropagation();">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button (click)="cancelEditTitle(); $event.stopPropagation();">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </ng-template>
+
+    </div>
+    <span>
+      Date created: {{workout.date}}
+    </span>
+  </div>
+
+  <br>
+
+  <mat-accordion class="exercise-list">
+    <mat-expansion-panel *ngFor="let workoutexercise of workout.workoutexercises" [hideToggle]="false"
+      togglePosition="before">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ workoutexercise.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <button mat-icon-button
+            (click)="navigateToWorkoutExerciseDetails(workoutexercise.id!); $event.stopPropagation();"
+            class="see-details-workoutexercise-button">
+            <mat-icon>description</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Delete exercise" matTooltipShowDelay="500" matTooltipPosition="above"
+            (click)="deleteExercise(workoutexercise.id!, $event);" class="exerciseSetDeleteButton">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <h3>Sets</h3>
+        <div class="titles">
+          <span>Description</span>
+          <span>Weight</span>
+          <span>Unit</span>
+          <span># of Reps</span>
+        </div>
+        <div>
+          <ol>
+            <li *ngFor="let set of workoutexercise.sets">
+              <ng-container *ngIf="!set.isEditing; else editMode">
+
+                <!-- Values row -->
+                <div hideToggle (click)="$event.stopPropagation();" class="values">
+                  <span>{{ set.description }}</span> |
+                  <span>{{ set.weight }}</span> |
+                  <span>{{ set.unit }}</span> |
+                  <span>{{ set.numberOfReps}}</span>
+
+                  <button mat-icon-button (click)="editSet(set)" class="exerciseSetEditButton">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                  <button mat-icon-button (click)="deleteSet(set, workoutexercise.id!); $event.stopPropagation();"
+                    class="exerciseSetDeleteButton">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </ng-container>
+              <ng-template #editMode>
+
+                <input [(ngModel)]="set.description" placeholder="Description" />
+                <input [(ngModel)]="set.weight" type="number" placeholder="Weight" />
+
+                <select id="unit-select" [(ngModel)]="set.unit">
+                  <option value="asdf" disabled selected>Select Unit</option>
+                  <option *ngFor="let unit of weightUnits" [value]="unit">{{ unit }}</option>
+                </select>
+
+                <input [(ngModel)]="set.numberOfReps" type="number" placeholder="Reps" />
+
+                <button mat-icon-button (click)="saveSet(set, workoutexercise); $event.stopPropagation();">
+                  <mat-icon>save</mat-icon>
+                </button>
+                <button mat-icon-button (click)="editSet(set); $event.stopPropagation();">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </ng-template>
+            </li>
+          </ol>
+        </div>
+        <button mat-raised-button color="accent" (click)="addSetTo(workoutexercise, true)">
+          <mat-icon>add</mat-icon>
+          Add Set
+        </button>
+      </div>
+    </mat-expansion-panel>
+    <br>
+
+    <button class="add-exercise-button" mat-raised-button color="primary" matTooltip="Add new exercise"
+      matTooltipShowDelay="500" matTooltipPosition="above" (click)="navigateToExerciseSelection(workout.id!)">
+      <mat-icon>add</mat-icon>
+      Add Exercise
+    </button>
+    <br>
+  </mat-accordion>
+</div>
+
+<!--
+<div style="position: absolute; top: 70%; bottom: 20px; left: 5%; right: 0; background-color: lightblue;">
+  <app-item-accordion></app-item-accordion>
+</div>
+-->

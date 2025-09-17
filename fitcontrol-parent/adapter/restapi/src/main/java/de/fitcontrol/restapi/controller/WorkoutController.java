@@ -2,6 +2,7 @@ package de.fitcontrol.restapi.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 import de.fitcontrol.model.ExerciseSet;
 import de.fitcontrol.model.Workout;
 import de.fitcontrol.model.enums.MuscleGroup;
-import de.fitcontrol.restapi.controller.json.WorkoutDto;
+import de.fitcontrol.service.StatsService;
 import de.fitcontrol.service.WorkoutService;
 import de.fitcontrol.service.ports.WorkoutRepository;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 //import lombok.extern.slf4j.Slf4j;
 
 @RestController
-//@Slf4j
+@Slf4j
 @RequestMapping(value = "/workout", produces = { "application/json" })
 public class WorkoutController {
 	
 	@Autowired WorkoutService workoutService;
+	@Autowired StatsService statsService;
 	@Autowired WorkoutRepository workoutRepo;
 	
 	@ApiResponse(responseCode = "200", description = "OK")
@@ -115,9 +118,10 @@ public class WorkoutController {
 	}
 	
 	@ApiResponse(responseCode = "200", description = "OK")
-	@GetMapping("/musclegroupstats")
-	public Optional<Workout> getMusclegroupStats(MuscleGroup muscleGroup) {
-		return null;
+	@GetMapping("/primarymusclegroupstats")
+	public Map<MuscleGroup, Integer> getPrimaryMusclegroupStats(MuscleGroup muscleGroup) {
+		System.out.println("--------getPrimaryMusclegroupStats--> " );
+		return statsService.getPrimaryMuscleGroupStats();
 	}
 	
 	@ApiResponse(responseCode = "200", description = "OK")
