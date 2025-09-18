@@ -28,8 +28,14 @@ implements UserStorageProviderFactory<FitcontrolUserStorageProvider>,
 ImportSynchronization
 {
 
-    public FitcontrolUserStorageProviderFactory() {
-		super();
+	public FitcontrolUserStorageProviderFactory() {
+	    try {
+	        System.out.println(">>> FitcontrolUserStorageProviderFactory constructor START");
+	        // Your init code
+	    } catch (Throwable t) {
+	        t.printStackTrace();  // Will show in Keycloak logs!
+	        throw new RuntimeException("Constructor failed", t);
+	    }
 	}
 
 	private final RestTemplate restTemplate = new RestTemplate(); // or HttpClient
