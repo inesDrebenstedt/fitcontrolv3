@@ -1,5 +1,6 @@
 package de.fitcontrol.restapi.controller;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import de.fitcontrol.model.ExerciseSet;
 import de.fitcontrol.model.Workout;
 import de.fitcontrol.model.enums.MuscleGroup;
-import de.fitcontrol.restapi.controller.json.WorkoutDto;
 import de.fitcontrol.service.WorkoutService;
 import de.fitcontrol.service.ports.WorkoutRepository;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 //import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
-//@Slf4j
+@Slf4j
 @RequestMapping(value = "/workout", produces = { "application/json" })
 public class WorkoutController {
 	
@@ -93,6 +94,13 @@ public class WorkoutController {
 	@GetMapping("/all")
 	public List<Workout> showAllWorkouts() {
 		return (workoutService.showAllWorkouts());
+	}
+	
+	@ApiResponse(responseCode = "200", description = "OK")
+	@GetMapping("/allof")
+	public List<Workout> showAllWorkoutsOf(@RequestParam("userName") String userName) {
+		log.atDebug().log("-------userName there??------> " + userName);
+		return (workoutService.showAllWorkoutsOf(userName));
 	}
 	
 	@ApiResponse(responseCode = "200", description = "OK")

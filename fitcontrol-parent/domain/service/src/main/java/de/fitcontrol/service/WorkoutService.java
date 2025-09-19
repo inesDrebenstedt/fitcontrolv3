@@ -1,5 +1,7 @@
 package de.fitcontrol.service;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +18,9 @@ import de.fitcontrol.service.ports.ExerciseSetRepository;
 import de.fitcontrol.service.ports.RepRepository;
 import de.fitcontrol.service.ports.WorkoutExerciseRepository;
 import de.fitcontrol.service.ports.WorkoutRepository;
-import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Service
 public class WorkoutService {
 
@@ -89,7 +91,7 @@ public class WorkoutService {
 		workoutRepo.deleteById(workoutId);
 	}
 
-	public Workout updateWorkout(Workout updatedWorkout) {
+	public Workout updateWorkout(Workout incomingWorkout) {
 		// TODO: aufräumen
 //		System.out.println("WorkoutService updateWorkout() called");
 		/*
@@ -103,8 +105,7 @@ public class WorkoutService {
 			});
 		});
 		*/
-
-		return workoutRepo.save(updatedWorkout);
+		return workoutRepo.save(incomingWorkout);
 	}
 
 	public Workout addWorkoutExercise(Long workoutId, Long exerciseId) {
@@ -267,6 +268,14 @@ public class WorkoutService {
 
 	public List<Workout> showAllWorkouts() {
 		return workoutRepo.findAll();
+	}
+
+	public List<Workout> showAllWorkoutsOf(String userName) {
+		//TODO: raus nach Tests
+		log.atDebug().log("-----------showAllWorkoutsOf----------> " + userName);
+		return workoutRepo.findAll().stream().filter( workout -> 
+			workout.getAppUser().getUserName().equals(userName)
+		).toList();
 	}
 
 }

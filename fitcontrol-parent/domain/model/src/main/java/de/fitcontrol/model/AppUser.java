@@ -3,6 +3,8 @@ package de.fitcontrol.model;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +59,7 @@ public class AppUser {
     
     @Getter
     @Setter
+    @JsonManagedReference
     @OneToMany(mappedBy = "appUser", cascade = {
 			CascadeType.DETACH, 
 			CascadeType.PERSIST, 
