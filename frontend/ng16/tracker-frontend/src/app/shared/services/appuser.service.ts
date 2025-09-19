@@ -29,9 +29,9 @@ export class AppUserService {
     private http: HttpClient
   ) { }
 
-    getCurrentAppUserInfo(): Observable<string> {
+    getCurrentAppUserInfo(): Observable<AppUser> {
     console.log('............ AppUserService getCurrentAppUserInfo ' )
-    return this.http.get<string>(`${this.apiUrl}/appuser-info`);
+    return this.http.get<AppUser>(`${this.apiUrl}/appuser-info`);
   }
 
 

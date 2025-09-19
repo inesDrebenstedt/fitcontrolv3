@@ -98,13 +98,10 @@ export class WorkoutDetailComponent implements OnInit {
             history.replaceState(updatedStateSelectedExerciseId, document.title, window.location.href);
             const updatedStatecomingFromExerciseSelectionView = { ...history.state, comingFromExerciseSelectionView: false };
             history.replaceState(updatedStatecomingFromExerciseSelectionView, document.title, window.location.href);
-
           }
         }
-        
         });
       }
-
   });
 }
 
@@ -114,7 +111,11 @@ export class WorkoutDetailComponent implements OnInit {
   }
 
   saveWorkout(workout: Workout) {
-    this.workoutService.saveWorkout(workout);
+    this.workoutService.saveWorkout(workout).subscribe(workout => {
+      this.workout = workout;
+      //TODO: remove after Tests
+      console.log('............... workout to save: ' + JSON.stringify(this.workout))
+    });
   }
 
   addExerciseTo(workout: Workout, selectedExerciseId: number) {

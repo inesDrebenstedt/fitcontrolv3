@@ -27,6 +27,7 @@ export class NavbarComponent {
   navbarTitle: string = ' ';
   currentUrl: string = '';
   notInLoginMode = true;
+  appUserName: string = '';
 
   constructor(
     private router: Router,
@@ -45,7 +46,8 @@ export class NavbarComponent {
       }
     });
       this.appUserService.getCurrentAppUserInfo().subscribe(appuser => {
-        console.log('---------------> ' + JSON.stringify(appuser));
+        this.appUserName = appuser.userName
+        //console.log('---------------> ' + JSON.stringify(appuser));
     });
   }
 

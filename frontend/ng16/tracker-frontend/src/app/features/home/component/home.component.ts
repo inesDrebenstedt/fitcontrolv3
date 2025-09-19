@@ -4,6 +4,7 @@ import { ActionwidgetComponent } from "@old_shared/components/actionwidget/actio
 import { CommonModule} from '@angular/common';
 import { XychartComponent } from "@old_shared/components/charts/xychart/xychart/xychart.component";
 import { WorkoutService } from '@old_shared/services/workout.service';
+import { AppUser } from 'src/app/core/model/appuser';
 
 @Component({
   standalone: true, 
@@ -12,11 +13,13 @@ import { WorkoutService } from '@old_shared/services/workout.service';
   styleUrls: ['./home.component.scss'],
   imports: [ActionwidgetBlueComponent, ActionwidgetComponent, CommonModule, XychartComponent],
 })
-export class HomeComponent {
+export class HomeComponent{
 
-    constructor(
+  constructor(
     private workoutService: WorkoutService
   ) { }
+
+  currentAppUser: AppUser | undefined;
 
   onAction(arg0: string) {
     throw new Error('Method not implemented.');

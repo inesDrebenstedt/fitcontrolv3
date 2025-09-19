@@ -22,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             Authorization: `Bearer ${token}`
           }
         });
-        console.log('Interceptor added token:', token); // Log a partial token for security
+        //console.log('Interceptor added token:', token); // Log a partial token for security
         return next(clonedReq).pipe(
           catchError(error => {
             // Handle HTTP errors here if needed
