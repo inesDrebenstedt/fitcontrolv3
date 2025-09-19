@@ -7,12 +7,13 @@ import { ExerciseService } from '@old_shared/services/exercise.service';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-create-exercise',
   templateUrl: './create-exercise.component.html',
   styleUrls: ['./create-exercise.component.scss'],
-  imports: [MatFormFieldModule, ReactiveFormsModule, CommonModule]
+  imports: [MatFormFieldModule, ReactiveFormsModule, CommonModule, MatInputModule ]
 })
 export class CreateExerciseComponent {
   createExerciseForm!: FormGroup;
@@ -26,13 +27,18 @@ export class CreateExerciseComponent {
   // Model for the selected value
   selectedMuscleGroup: MuscleGroup | undefined;
 
+titleOfNewExercise: string = '';
+descriptionOfNewExercise: string = '';
+selectedPrimaryMgValues: MuscleGroup[] = [];
+selectedSecondaryMgValues: MuscleGroup[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private exerciseService: ExerciseService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+
+constructor(
+  private fb: FormBuilder,
+  private exerciseService: ExerciseService,
+  private route: ActivatedRoute,
+  private router: Router
+) { }
 
   ngOnInit() {
     this.createExerciseForm = this.fb.group({
@@ -59,9 +65,68 @@ export class CreateExerciseComponent {
     return this.createExerciseForm!.get('secondaryMuscleGroupsList') as FormArray;
   }
 
+  populatePrimaryMuscleGroups(): any[]{
+    let primaryMgValues: any = [];
+        this.primaryMuscleGroupsList.forEach(pmg => {
+        for (const [key, value] of Object.entries(MuscleGroup)) {
+          // Check if the current value matches the enum value
+          if (value === pmg) {
+              console.log(`pmg Key: ${key}, pmg Value: ${value}`);
+              primaryMgValues.push(value);
+          }
+      }
+    });
+    return primaryMgValues;
+  }
 
+    populateSecondaryMuscleGroups(): any[]{
+    let secondaryMgValues: any = [];
+    this.secondaryMuscleGroupsList.forEach(smg => {
+      for (const [key, value] of Object.entries(MuscleGroup)) {
+        if (value === smg) {
+            console.log(`smg Key: ${key}, smg Value: ${value}`);
+            secondaryMgValues.push(value);
+        }
+    }
+  });
+    return secondaryMgValues;
+  }
+
+  populateMuscleGroups(muscleGroupsList: MuscleGroup[]): any[]{
+    let mgValues: any = [];
+    muscleGroupsList.forEach(smg => {
+      for (const [key, value] of Object.entries(MuscleGroup)) {
+        if (value === smg) {
+            console.log(`smg Key: ${key}, smg Value: ${value}`);
+            mgValues.push(value);
+        }
+    }
+  });
+    return mgValues;
+  }
+
+onSubmit() {
+   this.titleOfNewExercise = this.createExerciseForm.get('titleField')?.value;
+   this.descriptionOfNewExercise = this.createExerciseForm.get('descriptionField')?.value;
+  
+  let primaryMgValues = this.populateMuscleGroups(this.primaryMuscleGroupsList);
+  let secondaryMgValues = this.populateMuscleGroups(this.secondaryMuscleGroupsList);
+
+    const newExercise = new ExerciseClass(
+      0, this.titleOfNewExercise, 
+      this.descriptionOfNewExercise, 
+      primaryMgValues, 
+      secondaryMgValues
+    );
+    const result = undefined;
+    this.exerciseService.saveExercise(newExercise).subscribe(() => {
+      this.router.navigate(['/exercise/all'], { state: { comingFromExerciseCreationView: true } });
+    });
+  }
+
+/*
   onSubmit() {
-    const title = this.createExerciseForm.get('titleField')?.value;
+   const title = this.createExerciseForm.get('titleField')?.value;
    const  description = this.createExerciseForm.get('descriptionField')?.value;
     //TODO in externe Methode packen
     let primaryMgValues: MuscleGroup[] = [];
@@ -93,6 +158,7 @@ export class CreateExerciseComponent {
       this.router.navigate(['/exercise/all'], { state: { comingFromExerciseCreationView: true } });
     });
   }
+  */
 
   // Method to add selected item to the list
   addMuscleGroup(primaryOrSecondaryMuscleGroupsList: MuscleGroup[], listType: string) {
