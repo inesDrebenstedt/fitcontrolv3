@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import de.fitcontrol.model.ExerciseSet;
 import de.fitcontrol.model.Workout;
 import de.fitcontrol.model.enums.MuscleGroup;
-import de.fitcontrol.restapi.controller.json.WorkoutDto;
 import de.fitcontrol.service.WorkoutService;
 import de.fitcontrol.service.ports.WorkoutRepository;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 //import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
-//@Slf4j
+@Slf4j
 @RequestMapping(value = "/workout", produces = { "application/json" })
 public class WorkoutController {
 	
@@ -40,16 +40,17 @@ public class WorkoutController {
 		return workoutService.createWorkout(workout);
 	}
 	
-	@PatchMapping("/{workoutId}")
-	public ResponseEntity<Workout> updateWorkout(
-	        @PathVariable Long workoutId,
-	        @RequestBody Workout patchWorkout) {
+	@PatchMapping("/patch")
+	public ResponseEntity<Workout> patchWorkout(@RequestBody Workout patchWorkout) {
 
-	    Optional<Workout> updated = workoutService.patchWorkout(workoutId, patchWorkout);
+	    Workout patched = workoutService.patchWorkout(patchWorkout).orElseThrow();
+	    log.atDebug().log("------------------ patched workout: " + patched.getWorkoutexercises().size());
 
-	    return updated
-	            .map(ResponseEntity::ok)
-	            .orElse(ResponseEntity.notFound().build());
+	    if (patched != null) {
+	        return ResponseEntity.ok(patched);
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
 	}
 
 	@PutMapping("/update")

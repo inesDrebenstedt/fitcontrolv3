@@ -6,11 +6,12 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 import de.fitcontrol.model.Workout;
 
-@Mapper
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface WorkoutMapper {
     WorkoutMapper INSTANCE = Mappers.getMapper(WorkoutMapper.class);
     

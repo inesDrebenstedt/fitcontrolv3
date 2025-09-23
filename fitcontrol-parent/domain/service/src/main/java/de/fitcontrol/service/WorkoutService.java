@@ -11,6 +11,7 @@ import de.fitcontrol.model.Exercise;
 import de.fitcontrol.model.ExerciseSet;
 import de.fitcontrol.model.Workout;
 import de.fitcontrol.model.WorkoutExercise;
+import de.fitcontrol.model.mapstruct.WorkoutMapper;
 import de.fitcontrol.service.ports.ExerciseRepository;
 import de.fitcontrol.service.ports.ExerciseSetRepository;
 import de.fitcontrol.service.ports.RepRepository;
@@ -154,14 +155,20 @@ public class WorkoutService {
 	}
 
 
-//	public void saveWorkout(Workout incomingWorkout) {
+	public Optional<Workout> patchWorkout(Workout incomingWorkout) {
 //		Workout workoutFromDB = workoutRepo.findById(incomingWorkout.getId()).get();
 //		// Use MapStruct to map fields
 //		WorkoutMapper.INSTANCE.updateWorkoutFromDto(incomingWorkout, workoutFromDB);
 //
 //		// Save the updated workout
-//		workoutRepo.save(workoutFromDB);
-//	}
+//		return workoutRepo.save(workoutFromDB);
+		
+		
+		 return workoutRepo.findById(incomingWorkout.getId()).map(workoutFromDB -> {
+			 WorkoutMapper.INSTANCE.updateWorkoutFromDto(incomingWorkout, workoutFromDB);
+		        return workoutRepo.save(workoutFromDB);
+		    });
+	}
 
 	public Workout deleteWorkoutExercise(Workout workout, Long workoutExerciseId) {
 //		workout.getWorkoutexercises().removeIf(exercise -> exercise.getId().equals(workoutExerciseId));
@@ -257,13 +264,13 @@ public class WorkoutService {
 		exerciseSetRepo.delete(setFromDB);
 	}
 
-	public Optional<Workout> patchWorkout(Long workoutId, Workout patchWorkout) {
-	    return workoutRepo.findById(workoutId).map(workout -> {
-	        if (patchWorkout.getTitle() != null) workout.setTitle(patchWorkout.getTitle());
-	        if (patchWorkout.getDuration() != null) workout.setDuration(patchWorkout.getDuration());
-	        return workoutRepo.save(workout);
-	    });
-	}
+//	public Optional<Workout> patchWorkout(Workout patchWorkout) {
+//	    return workoutRepo.findById(patchWorkout.getId()).map(workout -> {
+//	        if (patchWorkout.getTitle() != null) workout.setTitle(patchWorkout.getTitle());
+//	        if (patchWorkout.getDuration() != null) workout.setDuration(patchWorkout.getDuration());
+//	        return workoutRepo.save(workout);
+//	    });
+//	}
 
 	public List<Workout> showAllWorkouts() {
 		return workoutRepo.findAll();
