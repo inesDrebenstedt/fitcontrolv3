@@ -114,7 +114,11 @@ export class WorkoutDetailComponent implements OnInit {
   }
 
   saveWorkout(workout: Workout) {
-    this.workoutService.saveWorkout(workout);
+    //TODO ines
+this.workoutService.patchWorkout(workout).subscribe((workoutresponse) => {
+  this.workout = workoutresponse;
+});
+    //this.workoutService.saveWorkout(workout);
   }
 
   addExerciseTo(workout: Workout, selectedExerciseId: number) {

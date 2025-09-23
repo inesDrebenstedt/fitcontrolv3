@@ -53,6 +53,11 @@ export class WorkoutService {
     return this.http.post<Workout>(`${this.apiUrl}/create`, newWorkout)
   }
 
+    patchWorkout(workout: Workout) {
+    console.log('............ WorkoutService patch workout: ' )
+    return this.http.patch<Workout>(`${this.apiUrl}/patch`, workout);
+  }
+
   updateWorkout(workout: Workout) {
     console.log('............ WorkoutService updateWorkout: ' )
     return this.http.put<Workout>(`${this.apiUrl}/update`, workout);
