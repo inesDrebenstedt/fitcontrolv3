@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service'
+import { AppUserService } from '@old_shared/services/appuser.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class NavbarComponent {
   navbarTitle: string = ' ';
   currentUrl: string = '';
   notInLoginMode = true;
+  appUserName: string = '';
 
   constructor(
     private router: Router,
@@ -33,6 +35,7 @@ export class NavbarComponent {
     private workoutService: WorkoutService,
     private exerciseService: ExerciseService,
     private authService: AuthService,
+    private appUserService: AppUserService,
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,12 @@ export class NavbarComponent {
         this.navbarTitle = this.updateTitleBar();
       }
     });
+      this.appUserService.getCurrentAppUserInfo().subscribe(appuser => {
+        this.appUserName = appuser.userName
+        //console.log('---------------> ' + JSON.stringify(appuser));
+    });
   }
+
 
 
   getWorkoutTitle(): string {
@@ -104,7 +112,7 @@ export class NavbarComponent {
       case '/exercise/select':
         return 'Select Exercise to add';
     }
-
+              console.log('------navbarTitle updated---------> ' );
     return this.navbarTitle
   }
 

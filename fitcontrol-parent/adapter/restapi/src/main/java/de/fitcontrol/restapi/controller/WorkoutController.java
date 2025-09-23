@@ -1,5 +1,6 @@
 package de.fitcontrol.restapi.controller;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -94,6 +95,13 @@ public class WorkoutController {
 	@GetMapping("/all")
 	public List<Workout> showAllWorkouts() {
 		return (workoutService.showAllWorkouts());
+	}
+	
+	@ApiResponse(responseCode = "200", description = "OK")
+	@GetMapping("/allof")
+	public List<Workout> showAllWorkoutsOf(@RequestParam("userName") String userName) {
+		log.atDebug().log("-------userName there??------> " + userName);
+		return (workoutService.showAllWorkoutsOf(userName));
 	}
 	
 	@ApiResponse(responseCode = "200", description = "OK")

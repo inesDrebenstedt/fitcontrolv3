@@ -8,6 +8,8 @@ import { ActionwidgetComponent } from "@old_shared/components/actionwidget/actio
 import { MatGridList, MatGridTile } from "@angular/material/grid-list";
 
 import { MatIconModule } from "@angular/material/icon";
+import { AppUserService } from '@old_shared/services/appuser.service';
+import { AppUser } from 'src/app/core/model/appuser';
 
 
 @Component({
@@ -22,20 +24,36 @@ export class WorkoutListComponent implements OnInit{
   constructor(
     private workoutService: WorkoutService, 
     private route: ActivatedRoute, 
-    private router: Router
+    private router: Router,
+    private appUserService: AppUserService,
   ) { }
 
   navbarTitle: string = 'List of Workouts';
   testDate = new Date();//TODO remove
   workouts: Workout[] | undefined;
   comingFromListView: boolean | undefined;
+  currentAppUser: AppUser | undefined;
 
   ngOnInit(): void {
-    this.workoutService.getWorkouts().subscribe(data => {
-      this.workouts = data;
-      console.log('workouts: ' + this.workouts.length)
+    this.appUserService.getCurrentAppUserInfo().subscribe(appUser => {
+      console.log('-----user as JSON: ' + JSON.stringify(appUser));
+      this.currentAppUser = appUser
+
+      if(this.currentAppUser){
+      this.workoutService.getWorkoutsOfCurrentUser(appUser.userName).subscribe(data => {
+        this.workouts = data;
+        console.log('workouts of user : ' + this.workouts.length)
+      });
+    } else {
+      this.workoutService.getWorkouts().subscribe(data => {
+        this.workouts = data;
+        //console.log('-----workouts as JSON: ' + JSON.stringify(data));
+        console.log('no user found. workouts: ' + this.workouts.length)
+      });
+    }
+
     });
-    
+
   }
 
 

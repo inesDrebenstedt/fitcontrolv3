@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment.local'
 import { Workout } from '../../core/model/workout';
 import { WorkoutExercise } from '../../core/model/workout-exercise';
 import { ExerciseSet } from '../../core/model/exercise-set';
+import { AppUser } from 'src/app/core/model/appuser';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,11 @@ export class WorkoutService {
 
   getWorkoutFromMemory(): Workout | undefined {
     return this.selectedWorkout;
+  }
+
+    getWorkoutsOfCurrentUser(userName: string): Observable<Workout[]> {
+    console.log('............ WorkoutService getWorkouts of user: ' )
+    return this.http.get<Workout[]>(`${this.apiUrl}/allof?userName=${userName}`);
   }
 
   getWorkouts(): Observable<Workout[]> {
@@ -125,13 +131,12 @@ export class WorkoutService {
     };
 
     return this.http.delete<Workout>(`${this.apiUrl}/deleteWorkoutExercise`, options 
-
   );
   }
 
-  saveWorkout(workout: Workout) {
+  saveWorkout(workout: Workout): Observable<Workout> {
     console.log('............ WorkoutService saveWorkout: ' + workout.workoutexercises.length )
-    return this.http.post<Workout>(`${this.apiUrl}/update`, workout);
+    return this.http.put<Workout>(`${this.apiUrl}/update`, workout);
   }
 
   deleteWorkout(workoutId: number) { 

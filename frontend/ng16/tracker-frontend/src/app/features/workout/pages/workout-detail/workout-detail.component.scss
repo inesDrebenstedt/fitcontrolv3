@@ -5,15 +5,21 @@
 .save-workout-button {
     position: absolute;
     left: 82%;
+    width: 90px;
 }
 
 .delete-workout-button {
     color:crimson;
     position: relative;
     left: 82%;
-    margin-top: 15%;
+    margin-top: 18%;
     height: 40px;
     width: 90px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Optional: spacing between icon and text */
+    vertical-align: middle; /* fallback */
 }
 
 .create-workout-from-template-button {
@@ -21,7 +27,7 @@
   left: 82%;
   top: 50%;
   height: fit-content;
-  width: 90px;
+  width: 120px;
 }
 
 .create-workout-from-template-button-title {
@@ -69,8 +75,8 @@
   :host ::ng-deep  .exerciseSetDeleteButton {
     position: relative;
     transform: translateX(-45%) translateY(-21%); /* Optional: center vertically if needed */
-    left: 7%;
-    top: 25%;
+    left: 10%;
+    top: 23%;
     display: flex;
     align-items: center;
   }
@@ -79,7 +85,7 @@
     position: relative;
     transform: translateX(-75%) translateY(-21%); /* Optional: center vertically if needed */
     left: 10%;
-    top: 25%;
+    top: 20%;
     display: flex;
     align-items: center;
   }
@@ -105,6 +111,18 @@
     font-style: italic;
     transition: all 0.3s ease;
   }
+
+.add-exercise-button {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Optional: spacing between icon and text */
+  vertical-align: middle; /* fallback */
+}
+
+.add-exercise-button mat-icon {
+  font-size: 20px; /* Optional: tweak size */
+  vertical-align: middle; /* fallback */
+}
   
   .custom-dropdown:not(:placeholder-shown) + .placeholder,
   .custom-dropdown:focus + .placeholder {

@@ -9,6 +9,7 @@ import { WorkoutDetailComponent } from './features/workout/pages/workout-detail/
 import { WorkoutListComponent } from './features/workout/pages/workout-list/workout-list.component';
 import { WorkoutexerciseDetailComponent } from './features/workoutexercise/pages/workoutexercise-detail/workoutexercise-detail.component';
 import { XychartComponent } from '@old_shared/components/charts/xychart/xychart/xychart.component';
+import { NavbarComponent } from '@old_shared/components/navbar/navbar.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'exercise/singleexercise', component: ExerciseDetailsComponent },
   { path: 'exercise/select', component: SelectExerciseComponent },
   { path: 'exercise/create', component: CreateExerciseComponent },
+  { path: 'appuser/appuser-info', component: NavbarComponent },
 
 ];
