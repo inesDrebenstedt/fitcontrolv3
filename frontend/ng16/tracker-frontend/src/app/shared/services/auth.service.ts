@@ -9,9 +9,10 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private logoutUrl = 'http://localhost:8083/fitcontrol/tracker/api/auth/logout'; // Your Spring Boot logout endpoint
+  private logoutUrl = 'http://localhost:8083/fitcontrol/tracker/api/logout'; // Your Spring Boot logout endpoint
 
   constructor(private http: HttpClient, private router: Router) {}
+
 
   logout(): void {
     this.http.post(this.logoutUrl, {}).pipe(

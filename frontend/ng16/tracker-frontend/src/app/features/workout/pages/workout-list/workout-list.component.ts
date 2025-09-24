@@ -40,11 +40,14 @@ export class WorkoutListComponent implements OnInit{
       this.currentAppUser = appUser
 
       if(this.currentAppUser){
-      this.workoutService.getWorkoutsOfCurrentUser(appUser.userName).subscribe(data => {
+        console.log('-----user not undefined: ');
+
+      this.workoutService.getWorkoutsOfCurrentUser(this.currentAppUser.userName).subscribe(data => {
         this.workouts = data;
         console.log('workouts of user : ' + this.workouts.length)
       });
     } else {
+      console.log('-----user IS undefined: ');
       this.workoutService.getWorkouts().subscribe(data => {
         this.workouts = data;
         //console.log('-----workouts as JSON: ' + JSON.stringify(data));

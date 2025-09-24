@@ -13,15 +13,15 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class KeycloakController {
@@ -38,21 +38,31 @@ public class KeycloakController {
         return "Not authenticated.";
     }
     
-/*
-@GetMapping("/logout")
+    
+
+
+    
+@PostMapping("/logout")
 public void logout(HttpServletRequest request,
                    HttpServletResponse response,
                    Authentication authentication,
-                   @RegisteredOAuth2AuthorizedClient("keycloak") OAuth2AuthorizedClient authorizedClient) throws IOException {
-	System.out.println("----------WTF------------->" );
+                   @RegisteredOAuth2AuthorizedClient("keycloak") OAuth2AuthorizedClient authorizedClient
+                   ) throws IOException {
+	log.atDebug().log("----------WTF------------->" );
     new SecurityContextLogoutHandler().logout(request, response, authentication);
 
-    //String idToken = authorizedClient.getAccessToken().getTokenValue(); // Not ideal, try to get actual ID token if possible
+   //String idToken = authorizedClient.getAccessToken().getTokenValue(); // Not ideal, try to get actual ID token if possible
 
     // Ideally get ID token, not access token, depending on your config:
-    String idToken = ((OidcUser) authentication.getPrincipal()).getIdToken().getTokenValue();
+    //String idToken = ((OidcUser) authentication.getPrincipal()).getIdToken().getTokenValue();
+    
+    OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
 
-    String redirectUri = "http://localhost:4200"; // Or wherever you want
+    // Get ID token
+    String idToken = oidcUser.getIdToken().getTokenValue();
+
+
+    String redirectUri = "http://localhost:4200"; 
     String logoutUrl = "http://localhost:8081/realms/fitcontrol/protocol/openid-connect/logout" +
                        "?id_token_hint=" + idToken +
                        "&post_logout_redirect_uri=" + redirectUri;
@@ -61,7 +71,8 @@ public void logout(HttpServletRequest request,
 
     response.sendRedirect(logoutUrl);
 }
-*/
+
+
 
     @GetMapping("/oauth2-user-info")
     public String getOAuth2UserInfo(@AuthenticationPrincipal OAuth2User oauth2User) {

@@ -38,7 +38,8 @@ public class SecurityConfig {
                 //.requestMatchers("/**").authenticated() // Protected endpoint
                 .anyRequest().authenticated() // All other requests require authentication
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {})); // Configure JWT resource server
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+            ; // Configure JWT resource server
 
         return http.build();
     }

@@ -10,6 +10,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (!keycloak.isLoggedIn()) {
     console.log('Interceptor: Not logged in, skipping token addition.');
     return next(req); // Or redirect to login if necessary
+  } else {
+    console.log('User is logged in.')
   }
 
   // Use from() to convert the Promise to an Observable

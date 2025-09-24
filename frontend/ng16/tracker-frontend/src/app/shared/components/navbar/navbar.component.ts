@@ -47,7 +47,7 @@ export class NavbarComponent {
     });
       this.appUserService.getCurrentAppUserInfo().subscribe(appuser => {
         this.appUserName = appuser.userName
-        //console.log('---------------> ' + JSON.stringify(appuser));
+        console.log('---------------> ' + JSON.stringify(appuser));
     });
   }
 
@@ -126,7 +126,7 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout();
-    window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout';
+    //window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout';
   }
 
 }
