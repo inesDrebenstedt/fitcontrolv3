@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS  exercise (
   description VARCHAR
 );
 
-INSERT INTO exercise (id, title, description)
-VALUES (1, 'Bodyweight Squats', 'bodyweight exercise');
-INSERT INTO exercise (id, title, description)
-VALUES (2, 'Bodyweight PushUps', 'bodyweight exercise');
-INSERT INTO exercise (id, title, description)
-VALUES (3, 'SitUps', 'bodyweight exercise');
-INSERT INTO exercise (id, title, description)
-VALUES (4, 'Single Leg RDLs', 'bodyweight exercise');
+INSERT INTO exercise ( title, description)
+VALUES ('Bodyweight Squats', 'bodyweight exercise');
+INSERT INTO exercise (title, description)
+VALUES ('Bodyweight PushUps', 'bodyweight exercise');
+INSERT INTO exercise (title, description)
+VALUES ('SitUps', 'bodyweight exercise');
+INSERT INTO exercise ( title, description)
+VALUES ('Single Leg RDLs', 'bodyweight exercise');
 
 CREATE TABLE IF NOT EXISTS workout_exercise (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS workout_exercise (
   exercise_id BIGINT
 );
 
-INSERT INTO workout_exercise (id, title, description, workout_id, exercise_id)
-VALUES (1, 'Bodyweight Squats', 'bodyweight exercise', 1, 1);
+INSERT INTO workout_exercise (title, description, workout_id, exercise_id)
+VALUES ('Bodyweight Squats', 'bodyweight exercise', 1, 1);
 
-INSERT INTO workout_exercise (id, title, description, workout_id, exercise_id)
-VALUES (2, 'Bodyweight PushUps', 'bodyweight exercise', 1, 2);
+INSERT INTO workout_exercise (title, description, workout_id, exercise_id)
+VALUES ('Bodyweight PushUps', 'bodyweight exercise', 1, 2);
 
 
 
