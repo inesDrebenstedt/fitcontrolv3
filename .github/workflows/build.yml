@@ -36,6 +36,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+          SPRING_DATASOURCE_USERNAME: sa
+          SPRING_DATASOURCE_PASSWORD: ""
+          SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
         run: |
          cd fitcontrol-parent
          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=fitcontrol -Dsonar.projectName='fitcontrol'
