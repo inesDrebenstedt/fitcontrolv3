@@ -76,12 +76,12 @@ export class AppComponent implements OnInit {
     //this.fetchUserInfo();
   //}
 
-  /*
+  
   fetchUserInfo() {
     // This is the endpoint that Spring Boot protects.
-    const userInfoApiUrl = '/fitcontrol/tracker/api/user-info';
+    const userInfoApiUrl = '/fitcontrol/tracker/userinfo/user-info';
     // This is the endpoint that initiates the OAuth2 flow on Spring Boot.
-    const springBootAuthUrl = 'http://localhost:8083/fitcontrol/tracker/oauth2/authorization/keycloak';
+    //const springBootAuthUrl = 'http://localhost:8083/fitcontrol/tracker/oauth2/authorization/keycloak'; TODO
 
     this.http.get(userInfoApiUrl, { withCredentials: true, responseType: 'text' }).pipe(
       tap((data: string) => {
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
         if (error.status === 401 || error.status === 403 || error.status === 0) {
           console.log('User is not authenticated. Redirecting full browser to Spring Boot for Keycloak login...');
 
-          window.location.href = springBootAuthUrl;
+          //window.location.href = springBootAuthUrl; TODO
         } else {
           this.userInfo = `Error fetching user info: ${error.message || 'Unknown error'}`;
         }
@@ -117,7 +117,7 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  */
+  
 
   /*
   fetchUserInfo(){

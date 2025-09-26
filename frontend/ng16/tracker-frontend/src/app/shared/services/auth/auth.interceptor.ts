@@ -2,7 +2,57 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { from, switchMap, catchError, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
+// create a wrapper interceptor function that delegates to the class
+export const authInterceptorFn: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  const accessToken = authService.getAccessToken();
+
+  if (accessToken && req.url.startsWith('/api/')) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  }
+
+  return next(req);
+};
+
+/*
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+
+  constructor(private authService: AuthService) {}
+
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const accessToken = this.authService.getAccessToken();
+
+    // Attach token only to requests for your backend API
+    // Adjust '/api/' prefix based on your Spring Boot API paths
+    if (accessToken && request.url.startsWith('/api/')) { 
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+    }
+
+    return next.handle(request);
+  }
+}
+*/
+
+/*
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const keycloak = inject(KeycloakService);
 
@@ -42,6 +92,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 };
+*/
 
 /*
 import { HttpInterceptorFn } from '@angular/common/http';

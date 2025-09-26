@@ -1,22 +1,33 @@
-
-<div class="dashboard" >
-  <div class="tile-container" >
-    <app-actionwidget-blue *ngFor="let title of widgetTitles" [widgetTitle]="title" ></app-actionwidget-blue>
+<div class="dashboard">
+  <div class="tile-container">
+    <app-actionwidget-blue *ngFor="let title of widgetTitles" [widgetTitle]="title"></app-actionwidget-blue>
   </div>
   <div class="createbutton-container">
-    <app-actionwidget *ngFor="let title of actionTitles" [widgetTitle]="title" ></app-actionwidget>
+    <app-actionwidget *ngFor="let title of actionTitles" [widgetTitle]="title"></app-actionwidget>
   </div>
 </div>
 
 <div>
-      <button  
-    class="show-primary-mg-stats-button"
-    mat-raised-button color="primary" 
-    type="button" 
+  <button class="show-primary-mg-stats-button" mat-raised-button color="primary" type="button"
     (click)="showPrimaryMuscleGroupStats()">Show primary muscle group stats</button>
-<app-xychart></app-xychart>
+  <app-xychart></app-xychart>
 </div>
-  
+
+<h2>Welcome!</h2>
+<div *ngIf="!(authService.isAuthenticated$ | async); else loggedIn">
+  <p>You are not logged in.</p>
+  <button (click)="authService.login()">Login with Keycloak</button>
+</div>
+<ng-template #loggedIn>
+  <p>Hello, {{ (authService.currentUser$ | async)?.name || (authService.currentUser$ | async)?.preferred_username }}!
+  </p>
+  <button routerLink="/profile">Go to Profile</button>
+  <button (click)="authService.logout()">Logout</button>
+  <h3>Test API Call</h3>
+  <button (click)="callSecuredApi()">Call Secured Endpoint</button>
+  <p *ngIf="apiResponse">API Response: {{ apiResponse }}</p>
+</ng-template>
+
 <!--  
   <div class="dashboard">
     <h1>Dashboard</h1>

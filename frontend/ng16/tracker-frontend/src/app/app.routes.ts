@@ -10,6 +10,8 @@ import { WorkoutListComponent } from './features/workout/pages/workout-list/work
 import { WorkoutexerciseDetailComponent } from './features/workoutexercise/pages/workoutexercise-detail/workoutexercise-detail.component';
 import { XychartComponent } from '@old_shared/components/charts/xychart/xychart/xychart.component';
 import { NavbarComponent } from '@old_shared/components/navbar/navbar.component';
+import { AuthCallbackComponent } from '@old_shared/services/auth/component/auth-callback/auth-callback.component';
+import { LoggedOutComponent } from '@old_shared/services/auth/component/auth-callback/logged-out/logged-out.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,5 +27,8 @@ export const routes: Routes = [
   { path: 'exercise/select', component: SelectExerciseComponent },
   { path: 'exercise/create', component: CreateExerciseComponent },
   { path: 'appuser/appuser-info', component: NavbarComponent },
+    { path: 'auth-callback', component: AuthCallbackComponent },
+  { path: 'logged-out', component: LoggedOutComponent },
+  { path: '**', redirectTo: '' }
 
 ];

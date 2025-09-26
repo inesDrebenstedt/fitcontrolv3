@@ -7,7 +7,7 @@ import { Workout } from '../../core/model/workout';
 import { WorkoutExercise } from '../../core/model/workout-exercise';
 import { ExerciseSet } from '../../core/model/exercise-set';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 import { ExerciseService } from './exercise.service';
 import { WorkoutService } from './workout.service';
 import { AppUser } from 'src/app/core/model/appuser';

@@ -11,7 +11,7 @@
     "test-esm-isolated": "node --experimental-vm-modules --no-warnings node_modules/jest/bin/jest.js -c jest-esm-isolated.config.ts --no-cache"
   },
   "dependencies": {
-    "@angular/cdk": "^20.1.5",
+    "@angular/cdk": "^20.2.5",
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
     "@angular/core": "^20.0.0",
@@ -23,6 +23,7 @@
     "angular-in-memory-web-api": "^0.20.0",
     "angular-oauth2-oidc": "^20.0.2",
     "chart.js": "^4.5.0",
+    "jwt-decode": "^4.0.0",
     "keycloak-angular": "^20.0.0",
     "keycloak-js": "^26.2.0",
     "rxjs": "~7.8.2",

@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    
+    return this.authService.isAuthenticated$.pipe(
+      map(isAuthenticated => {
+        if (isAuthenticated) {
+          return true;
+        } else {
+          // You might want to store the intended URL to navigate back after login
+          // (optional, for better UX)
+          // this.authService.setRedirectUrl(state.url); 
+          this.authService.login(); // Initiate login flow
+          return false;
+        }
+      })
+    );
+  }
+}

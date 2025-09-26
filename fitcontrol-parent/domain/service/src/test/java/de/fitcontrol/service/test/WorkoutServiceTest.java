@@ -14,24 +14,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import de.fitcontrol.model.Workout;
 import de.fitcontrol.service.WorkoutService;
+import de.fitcontrol.service.ports.WorkoutRepository;
 
 @DirtiesContext
 @SpringBootTest(classes = {TestApplication.class, TestConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @Sql(scripts = "/testdata.sql")
+@TestPropertySource(locations = "classpath:application-test.properties")
+@ActiveProfiles("test")
 public class WorkoutServiceTest {
 
 	@Autowired
     private WorkoutService workoutService;
+	
+	@Autowired
+    private WorkoutRepository workoutrepo;
 
 
     @Test
     void testFindAllWorkouts() {
-    	assertEquals(2, workoutService.showAllWorkouts().size());
+    	int numberOfAllWorkouts = workoutrepo.findAll().size();
+    	assertEquals(numberOfAllWorkouts, workoutService.showAllWorkouts().size());
     }
     
     @Test

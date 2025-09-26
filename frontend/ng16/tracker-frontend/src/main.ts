@@ -6,7 +6,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { authInterceptor } from '@old_shared/services/auth.interceptor';
+//import { authInterceptor } from '@old_shared/services/auth/auth.interceptor';
+import { authInterceptorFn } from './app/shared/services/auth/auth.interceptor';
 
 // Keycloak init function called before app starts
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -26,10 +27,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
 }
 
 bootstrapApplication(AppComponent, {
+
   providers: [
     importProvidersFrom(OAuthModule.forRoot()),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptorFn])), //TODO ines: was included before pkce
     KeycloakService,
     {
       provide: APP_INITIALIZER,
