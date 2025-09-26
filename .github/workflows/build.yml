@@ -36,7 +36,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SPRING_PROFILES_ACTIVE: github
+          SPRING_PROFILES_ACTIVE: ci
           SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
           SPRING_DATASOURCE_USERNAME: sa
           SPRING_DATASOURCE_PASSWORD: ""
