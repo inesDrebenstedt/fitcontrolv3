@@ -151,6 +151,7 @@ export class WorkoutDetailComponent implements OnInit {
   }
 
   saveSet(set: ExerciseSet, workoutExercise: WorkoutExercise) {
+    console.log('================> set.isEditing: ' + set.isEditing); //TODO ines: raus
     for (let i = 0; i < set.numberOfReps; i++) {
       let newRep = new RepClass(undefined, RepCategory.full_ROM, undefined,false)
       set.reps.push(newRep)

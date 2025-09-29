@@ -126,7 +126,7 @@ export class NavbarComponent {
 
   logout() {
     this.authService.logout();
-    window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout';
+    //window.location.href = 'http://localhost:8083/fitcontrol/tracker/logout'; TODO ines: no backend endpoint yet
   }
 
 }
