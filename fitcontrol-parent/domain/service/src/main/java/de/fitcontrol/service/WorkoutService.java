@@ -49,21 +49,15 @@ public class WorkoutService {
 				.date(workout.getDate())
 				//.workoutexercises(workout.getWorkoutexercises())
 				.build();
-		System.out.println("-------------------1---------------------- create Workout called.");
 
 		workoutRepo.save(newWorkout);
 				
-		System.out.println("-------------------2---------------------- create Workout called.");
-				
 		List<Workout> workoutsByTitle = workoutRepo.findByTitle(newWorkout.getTitle());
 		workoutsByTitle.forEach(w -> {
-	    	System.out.println("----A---- ");
 			if(w.getDate().equals(newWorkout.getDate())) {
-				System.out.println("----B---- ");
 				Workout latestCreatedWorkout = w;
 				
 				if(workout.getWorkoutexercises().size() > 0) {
-					System.out.println("----C---- ");
 					workout.getWorkoutexercises().forEach(workoutexercise -> {
 						System.out.println("----D---- ");
 						WorkoutExercise we = WorkoutExercise.builder()

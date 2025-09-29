@@ -8,6 +8,7 @@ import { DecodedToken } from 'src/app/core/interface/DecodedToken';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode'; // Ensure you have jwt-decode installed
+import { KeycloakService } from 'keycloak-angular';
 
 
 @Injectable({
@@ -27,7 +28,7 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<DecodedToken | null>(null);
   currentUser$: Observable<DecodedToken | null> = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private keycloakService: KeycloakService) {
     this.checkAuthenticationStatus();
   }
 
@@ -114,6 +115,7 @@ export class AuthService {
         `post_logout_redirect_uri=${encodeURIComponent('http://localhost:4200/logged-out')}`;
       window.location.href = logoutUrl;
     } else {
+      this.keycloakService.logout('http://localhost:4200/logged-out');
       this.router.navigate(['/logged-out']);
     }
   }

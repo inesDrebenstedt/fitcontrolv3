@@ -28,7 +28,7 @@ export class WorkoutService {
     return this.selectedWorkout;
   }
 
-    getWorkoutsOfCurrentUser(userName: string): Observable<Workout[]> {
+  getWorkoutsOfCurrentUser(userName: string): Observable<Workout[]> {
     console.log('............ WorkoutService getWorkouts of user: ' )
     return this.http.get<Workout[]>(`${this.apiUrl}/allof?userName=${userName}`);
   }
