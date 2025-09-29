@@ -25,6 +25,8 @@ public class AppUserController {
 	
     @GetMapping("/appuser-info")
     public Optional<AppUser> getUserInfo(Authentication authentication) {
+
+        log.atDebug().log("---------------------- authentication: " + authentication.getDetails().toString());
     	Optional<AppUser> appUser = null;
         if (authentication instanceof JwtAuthenticationToken) {
         	

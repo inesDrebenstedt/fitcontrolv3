@@ -20,8 +20,7 @@ export class AuthGuard implements CanActivate {
         if (isAuthenticated) {
           return true;
         } else {
-          // You might want to store the intended URL to navigate back after login
-          // (optional, for better UX)
+          // (optional, for better UX): store the intended URL to navigate back after login
           // this.authService.setRedirectUrl(state.url); 
           this.authService.login(); // Initiate login flow
           return false;
