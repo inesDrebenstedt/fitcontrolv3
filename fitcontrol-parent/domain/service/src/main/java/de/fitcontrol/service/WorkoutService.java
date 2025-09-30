@@ -49,23 +49,16 @@ public class WorkoutService {
 				.date(workout.getDate())
 				//.workoutexercises(workout.getWorkoutexercises())
 				.build();
-		System.out.println("-------------------1---------------------- create Workout called.");
 
 		workoutRepo.save(newWorkout);
 				
-		System.out.println("-------------------2---------------------- create Workout called.");
-				
 		List<Workout> workoutsByTitle = workoutRepo.findByTitle(newWorkout.getTitle());
 		workoutsByTitle.forEach(w -> {
-	    	System.out.println("----A---- ");
 			if(w.getDate().equals(newWorkout.getDate())) {
-				System.out.println("----B---- ");
 				Workout latestCreatedWorkout = w;
 				
 				if(workout.getWorkoutexercises().size() > 0) {
-					System.out.println("----C---- ");
 					workout.getWorkoutexercises().forEach(workoutexercise -> {
-						System.out.println("----D---- ");
 						WorkoutExercise we = WorkoutExercise.builder()
 								.description(workoutexercise.getDescription())
 								.referencedExercise(workoutexercise.getReferencedExercise())
@@ -92,7 +85,7 @@ public class WorkoutService {
 		workoutRepo.deleteById(workoutId);
 	}
 
-	public Workout updateWorkout(Workout incomingWorkout) {
+	//public Workout updateWorkout(Workout incomingWorkout) {
 		// TODO: aufräumen
 //		System.out.println("WorkoutService updateWorkout() called");
 		/*
@@ -106,8 +99,8 @@ public class WorkoutService {
 			});
 		});
 		*/
-		return workoutRepo.save(incomingWorkout);
-	}
+		//return workoutRepo.save(incomingWorkout);
+	//}
 
 	public Workout addWorkoutExercise(Long workoutId, Long exerciseId) {
 
@@ -172,8 +165,8 @@ public class WorkoutService {
 	}
 
 	public Workout deleteWorkoutExercise(Workout workout, Long workoutExerciseId) {
-//		workout.getWorkoutexercises().removeIf(exercise -> exercise.getId().equals(workoutExerciseId));
-//		saveWorkout(workout);
+		workout.getWorkoutexercises().removeIf(exercise -> exercise.getId().equals(workoutExerciseId));
+		saveWorkout(workout);
 
 		workoutExerciseRepo.deleteById(workoutExerciseId);
 		return workout;

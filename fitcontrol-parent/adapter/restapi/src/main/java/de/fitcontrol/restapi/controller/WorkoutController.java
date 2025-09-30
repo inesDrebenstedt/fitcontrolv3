@@ -54,10 +54,10 @@ public class WorkoutController {
 	    }
 	}
 
-	@PutMapping("/update")
-	public Workout updateWorkout(@RequestBody Workout workout) {
-		return workoutService.updateWorkout(workout);
-	}
+//	@PutMapping("/update")
+//	public Workout updateWorkout(@RequestBody Workout workout) {
+//		return workoutService.updateWorkout(workout);
+//	}
 	
 	@PutMapping("/addWorkoutExercise")
 	public Workout addWorkoutExercise(@RequestParam Long workoutId, @RequestParam Long exerciseId) {
