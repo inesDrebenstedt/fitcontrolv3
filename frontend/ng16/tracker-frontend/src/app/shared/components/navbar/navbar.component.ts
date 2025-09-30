@@ -47,7 +47,6 @@ export class NavbarComponent {
     });
       this.appUserService.getCurrentAppUserInfo().subscribe(appuser => {
         this.appUserName = appuser.userName
-        //console.log('---------------> ' + JSON.stringify(appuser));
     });
   }
 
@@ -112,7 +111,6 @@ export class NavbarComponent {
       case '/exercise/select':
         return 'Select Exercise to add';
     }
-              console.log('------navbarTitle updated---------> ' );
     return this.navbarTitle
   }
 

@@ -45,7 +45,6 @@ public class WorkoutController {
 	public ResponseEntity<Workout> patchWorkout(@RequestBody Workout patchWorkout) {
 
 	    Workout patched = workoutService.patchWorkout(patchWorkout).orElseThrow();
-	    log.atDebug().log("------------------ patched workout: " + patched.getWorkoutexercises().size());
 
 	    if (patched != null) {
 	        return ResponseEntity.ok(patched);
@@ -54,10 +53,10 @@ public class WorkoutController {
 	    }
 	}
 
-	@PutMapping("/update")
-	public Workout updateWorkout(@RequestBody Workout workout) {
-		return workoutService.updateWorkout(workout);
-	}
+//	@PutMapping("/update")
+//	public Workout updateWorkout(@RequestBody Workout workout) {
+//		return workoutService.updateWorkout(workout);
+//	}
 	
 	@PutMapping("/addWorkoutExercise")
 	public Workout addWorkoutExercise(@RequestParam Long workoutId, @RequestParam Long exerciseId) {

@@ -30,6 +30,7 @@ export class HomeComponent{
   currentAppUser: AppUser | undefined;
 
   callSecuredApi() {
+    console.log('callSecuredApi---???')
     this.http.get('/api/secured').subscribe({
       next: (data: any) => this.apiResponse = JSON.stringify(data),
       error: (err) => {

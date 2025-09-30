@@ -33,6 +33,7 @@ export class AuthService {
   }
 
   private checkAuthenticationStatus(): void {
+    console.log('------------------- checkAuthenticationStatus()')
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       try {
@@ -47,10 +48,11 @@ export class AuthService {
         console.error('Invalid access token:', e);
         this.logout(false);
       }
-    }
+    } else {this.router.navigate(['/']);}
   }
 
   login(): void {
+    console.log('-----------------login() ')
     const codeVerifier = this.generateCodeVerifier();
     sessionStorage.setItem('code_verifier', codeVerifier);
 
@@ -63,11 +65,14 @@ export class AuthService {
         `scope=openid profile email&` + // Request necessary scopes
         `code_challenge=${codeChallenge}&` +
         `code_challenge_method=S256`;
+        
       window.location.href = authUrl;
     });
+     this.router.navigate(['/']);
   }
 
   handleAuthCallback(code: string): Observable<any> {
+     console.log('------------------- handleAuthCallback()')
     const codeVerifier = sessionStorage.getItem('code_verifier');
     if (!codeVerifier) {
       return new Observable(observer => observer.error('Code verifier not found in session storage.'));
@@ -96,6 +101,7 @@ export class AuthService {
   }
 
   logout(redirectKeycloak: boolean = true): void {
+          console.log('-------------------- logout()');
     const refreshToken = localStorage.getItem('refresh_token');
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
@@ -105,6 +111,7 @@ export class AuthService {
     this.currentUserSubject.next(null);
 
     if (redirectKeycloak && refreshToken) {
+      console.log('--------------------1');
       // Keycloak logout requires id_token_hint for identity confirmation
       // and redirect_uri for post-logout redirection.
       const idToken = localStorage.getItem('id_token');
@@ -113,10 +120,11 @@ export class AuthService {
         `client_id=${this.KEYCLOAK_CLIENT_ID}&` +
         `id_token_hint=${idToken}&` +
         `post_logout_redirect_uri=${encodeURIComponent('http://localhost:4200/logged-out')}`;
-      window.location.href = logoutUrl;
+      //window.location.href = logoutUrl;
     } else {
+      console.log('--------------------2');
       this.keycloakService.logout('http://localhost:4200/logged-out');
-      this.router.navigate(['/logged-out']);
+      //this.router.navigate(['/logged-out']);
     }
   }
 
@@ -126,6 +134,7 @@ export class AuthService {
 
   // --- PKCE Helper Functions ---
   private generateCodeVerifier(): string {
+    console.log('------------------- generateCodeVerifier()')
     const randomBytes = new Uint8Array(32);
     crypto.getRandomValues(randomBytes);
     return this.base64urlencode(randomBytes);
